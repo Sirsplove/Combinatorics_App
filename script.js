@@ -1914,4 +1914,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
+    
+    // Mobile header scroll behavior
+    let lastScrollTop = 0;
+    let isScrolling = false;
+    const header = document.querySelector('.header');
+    
+    function handleScroll() {
+        if (!isMobile() || !header) return;
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Only trigger if scroll difference is significant (avoid jittery behavior)
+        if (Math.abs(scrollTop - lastScrollTop) < 5) return;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down - hide header
+            header.classList.remove('visible');
+            header.classList.add('hidden');
+        } else {
+            // Scrolling up - show header
+            header.classList.remove('hidden');
+            header.classList.add('visible');
+        }
+        
+        lastScrollTop = scrollTop;
+    }
+    
+    // Throttle scroll events for better performance
+    function throttle(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Add scroll listener with throttling
+    window.addEventListener('scroll', throttle(handleScroll, 10));
+    
+    // Initialize header as visible
+    if (isMobile() && header) {
+        header.classList.add('visible');
+    }
 });

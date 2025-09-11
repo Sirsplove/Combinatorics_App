@@ -49,6 +49,7 @@ div, section, article, main, aside {
     right: 0;
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .header .container {
@@ -56,6 +57,19 @@ div, section, article, main, aside {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 20px;
+}
+
+/* Mobile scroll behavior for header */
+@media (max-width: 768px) {
+    .header.hidden {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    
+    .header.visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .header-actions {
