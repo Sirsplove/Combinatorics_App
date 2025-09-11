@@ -273,125 +273,7 @@ const problems = {
     }
 };
 
-function loadProblem(problemType) {
-    const problem = problems[problemType];
-    const workspace = document.getElementById('problem-workspace');
-    const title = document.getElementById('problem-title');
-    const content = document.getElementById('problem-content');
-    
-    title.textContent = problem.title;
-    
-    // Problem loaded - no progress tracking yet
-    
-    let html = `
-        <div class="problem-scenario">
-            <h4>Scenario:</h4>
-            <p>${problem.scenario}</p>
-        </div>
-        
-        <div class="problem-scenario">
-            <h4>Problem:</h4>
-            <p>${problem.problem}</p>
-        </div>
-    `;
-    
-    if (problem.constraints) {
-        html += `
-            <div class="problem-scenario">
-                <h4>Constraints:</h4>
-                <ul>
-                    ${problem.constraints.map(constraint => `<li>${constraint}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-    }
-    
-    if (problem.locations) {
-        html += `
-            <div class="problem-scenario">
-                <h4>Locations:</h4>
-                <div class="locations-grid">
-                    ${problem.locations.map(loc => `
-                        <div class="location-item">
-                            <strong>${loc.name}</strong><br>
-                            Position: (${loc.x}, ${loc.y})<br>
-                            Window: ${loc.window}
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    if (problem.policies) {
-        html += `
-            <div class="problem-scenario">
-                <h4>Security Policies:</h4>
-                <ul>
-                    ${problem.policies.map(policy => `<li>${policy}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-    }
-    
-    if (problem.sectors) {
-        html += `
-            <div class="problem-scenario">
-                <h4>Investment Sectors:</h4>
-                <div class="sectors-grid">
-                    ${problem.sectors.map(sector => `
-                        <div class="sector-item">
-                            <strong>${sector.name}</strong><br>
-                            Success Rate: ${(sector.success_rate * 100).toFixed(0)}%<br>
-                            Portfolio Weight: ${(sector.weight * 100).toFixed(0)}%
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    html += `
-        <div class="solution-steps">
-            <h4>Solution Approach:</h4>
-            <p>${problem.solution}</p>
-            
-            <h4>Step-by-step Solution:</h4>
-            ${problem.steps.map((step, index) => `
-                <div class="step">
-                    <span class="step-number">${index + 1}.</span> ${step}
-                </div>
-            `).join('')}
-        </div>
-    `;
-    
-    if (problem.interactive) {
-        html += `
-            <div class="interactive-section">
-                <h4>Try It Yourself:</h4>
-                <button class="btn btn-primary" onclick="startInteractiveProblem('${problemType}')">
-                    <i class="fas fa-play"></i> Interactive Demo
-                </button>
-            </div>
-        `;
-    }
-    
-    // Add solve button
-    html += `
-        <div class="problem-actions" style="margin-top: 2rem; text-align: center;">
-            <button class="btn btn-primary" onclick="solveProblem()">
-                <i class="fas fa-check"></i> Mark as Solved
-            </button>
-        </div>
-    `;
-    
-    content.innerHTML = html;
-    workspace.style.display = 'block';
-}
-
-function closeProblem() {
-    document.getElementById('problem-workspace').style.display = 'none';
-}
+// Old functions removed - using popups now
 
 function solveProblem() {
     // Mark problem as solved
@@ -1466,20 +1348,7 @@ const modules = {
     }
 };
 
-function showModule(moduleType) {
-    const module = modules[moduleType];
-    const content = document.getElementById('module-content');
-    const title = document.getElementById('module-title');
-    const text = document.getElementById('module-text');
-    
-    title.textContent = module.title;
-    text.innerHTML = module.content;
-    content.style.display = 'block';
-}
-
-function closeModule() {
-    document.getElementById('module-content').style.display = 'none';
-}
+// Old module functions removed - using popups now
 
 // Interactive Problem Demos
 function startInteractiveProblem(problemType) {
