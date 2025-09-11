@@ -4,26 +4,26 @@ A comprehensive web application that teaches combinatorics through real-world pr
 
 ## Features
 
-### 🎯 Real-World Problem Solving
+###  Real-World Problem Solving
 - **Scheduling Optimization**: Solve class scheduling conflicts using graph coloring
 - **Route Optimization**: Find optimal delivery routes using the Traveling Salesman Problem
 - **Password Security Analysis**: Calculate password possibilities under different security policies
 - **Risk Assessment**: Analyze investment portfolio probabilities and expected returns
 
-### 🎮 Interactive Games
+###  Interactive Games
 - **Permutation Puzzle**: Arrange items in different orders to discover patterns
 - **Combination Challenge**: Select the right combination of items to solve puzzles
 - **Probability Roulette**: Predict outcomes and calculate probabilities in real-time
 - **Graph Traversal**: Navigate networks and find optimal paths
 
-### 🧮 Visual Calculator
+###  Visual Calculator
 - **Permutations (nPr)**: Calculate arrangements where order matters
 - **Combinations (nCr)**: Calculate selections where order doesn't matter
 - **Factorials (n!)**: Calculate the number of ways to arrange n objects
 - **Subsets**: Calculate the total number of possible subsets
 - **Step-by-step solutions** with detailed explanations
 
-### 📚 Educational Content
+###  Educational Content
 - **Fundamentals**: Basic principles of counting, permutations, and combinations
 - **Advanced Topics**: Generating functions, recurrence relations, and graph theory
 - **Applications**: Real-world uses in computer science, biology, and economics
