@@ -1406,54 +1406,150 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     .mobile-nav {
         display: none;
         position: fixed;
-        bottom: 0;
-        left: 0;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(20, 20, 20, 0.98);
+        backdrop-filter: blur(15px);
+        border-left: 1px solid rgba(0, 180, 216, 0.2);
+        padding: 0;
+        z-index: 2000;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+    }
+    
+    .mobile-nav.open {
         right: 0;
-        background: rgba(20, 20, 20, 0.95);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(0, 180, 216, 0.2);
+    }
+    
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+        background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .mobile-nav-header h3 {
+        color: #00b4d8;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    
+    .mobile-nav-close {
+        background: none;
+        border: none;
+        color: #e8e8e8;
+        font-size: 1.2rem;
+        cursor: pointer;
         padding: 0.5rem;
-        z-index: 1000;
+        border-radius: 50%;
+        transition: background-color 0.3s ease;
+    }
+    
+    .mobile-nav-close:hover {
+        background: rgba(0, 180, 216, 0.1);
     }
     
     .mobile-nav-items {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        flex-direction: column;
+        padding: 1rem 0;
     }
     
     .mobile-nav-item {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        padding: 0.5rem;
+        padding: 1rem 1.5rem;
         color: #e8e8e8;
         text-decoration: none;
-        font-size: 0.8rem;
-        transition: color 0.3s ease;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+    }
+    
+    .mobile-nav-item:hover {
+        background: rgba(0, 180, 216, 0.1);
+        border-left-color: #00b4d8;
     }
     
     .mobile-nav-item.active {
         color: #00b4d8;
+        background: rgba(0, 180, 216, 0.1);
+        border-left-color: #00b4d8;
     }
     
     .mobile-nav-item i {
+        font-size: 1.3rem;
+        margin-right: 1rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .mobile-nav-item span {
+        font-weight: 500;
+    }
+    
+    /* Hamburger button */
+    .btn-hamburger {
+        display: none;
+        background: none;
+        border: none;
+        color: #e8e8e8;
         font-size: 1.2rem;
-        margin-bottom: 0.25rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-hamburger:hover {
+        background: rgba(0, 180, 216, 0.1);
+        color: #00b4d8;
+    }
+    
+    /* Mobile overlay */
+    .mobile-nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .mobile-nav-overlay.show {
+        opacity: 1;
     }
     
     /* Show mobile nav on mobile */
     @media (max-width: 768px) {
-        .mobile-nav {
+        .btn-hamburger {
             display: block;
         }
         
+        .mobile-nav-overlay {
+            display: block;
+        }
+        
+        /* Hide desktop navigation on mobile */
+        .nav {
+            display: none;
+        }
+        
+        /* Remove bottom margin since nav is now slide-out */
         .main {
-            margin-bottom: 80px; /* Space for mobile nav */
+            margin-bottom: 0;
         }
         
         .footer {
-            margin-bottom: 80px; /* Space for mobile nav */
+            margin-bottom: 0;
         }
     }
 }

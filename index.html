@@ -37,6 +37,9 @@
                 <a href="#multiplayer" class="nav-link" data-tooltip="Compete with friends">Multiplayer</a>
             </nav>
             <div class="header-actions">
+                <button class="btn-hamburger" onclick="toggleMobileNav()" title="Menu" id="hamburger-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <button class="btn-theme" onclick="toggleTheme()" title="Toggle Theme">
                     <i class="fas fa-moon" id="theme-icon"></i>
                 </button>
@@ -557,26 +560,35 @@
         </div>
     </footer>
 
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay" onclick="toggleMobileNav()"></div>
+    
     <!-- Mobile Navigation -->
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <h3>Navigation</h3>
+            <button class="mobile-nav-close" onclick="toggleMobileNav()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
         <div class="mobile-nav-items">
-            <a href="#" class="mobile-nav-item" onclick="showSection('home')">
+            <a href="#" class="mobile-nav-item" onclick="showSection('home'); toggleMobileNav();">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
-            <a href="#" class="mobile-nav-item" onclick="showSection('problems')">
+            <a href="#" class="mobile-nav-item" onclick="showSection('problems'); toggleMobileNav();">
                 <i class="fas fa-puzzle-piece"></i>
                 <span>Problems</span>
             </a>
-            <a href="#" class="mobile-nav-item" onclick="showSection('games')">
+            <a href="#" class="mobile-nav-item" onclick="showSection('games'); toggleMobileNav();">
                 <i class="fas fa-gamepad"></i>
                 <span>Games</span>
             </a>
-            <a href="#" class="mobile-nav-item" onclick="showSection('calculator')">
+            <a href="#" class="mobile-nav-item" onclick="showSection('calculator'); toggleMobileNav();">
                 <i class="fas fa-calculator"></i>
                 <span>Calculator</span>
             </a>
-            <a href="#" class="mobile-nav-item" onclick="showSection('learn')">
+            <a href="#" class="mobile-nav-item" onclick="showSection('learn'); toggleMobileNav();">
                 <i class="fas fa-book"></i>
                 <span>Learn</span>
             </a>

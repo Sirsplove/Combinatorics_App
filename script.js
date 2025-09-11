@@ -1961,4 +1961,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isMobile() && header) {
         header.classList.add('visible');
     }
+    
+    // Mobile navigation toggle function
+    window.toggleMobileNav = function() {
+        const mobileNav = document.getElementById('mobile-nav');
+        const overlay = document.getElementById('mobile-nav-overlay');
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        
+        if (!mobileNav || !overlay) return;
+        
+        const isOpen = mobileNav.classList.contains('open');
+        
+        if (isOpen) {
+            // Close the menu
+            mobileNav.classList.remove('open');
+            overlay.classList.remove('show');
+            hamburgerBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        } else {
+            // Open the menu
+            mobileNav.classList.add('open');
+            overlay.classList.add('show');
+            hamburgerBtn.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    };
 });
