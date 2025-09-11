@@ -40,16 +40,18 @@
       "!.github"
     ],
     "win": {
-      "target": "nsis",
-      "icon": "assets/icon.ico"
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "sign": false
     },
     "mac": {
       "target": "dmg",
-      "icon": "assets/icon.icns"
+      "sign": false
     },
     "linux": {
-      "target": "AppImage",
-      "icon": "assets/icon.png"
+      "target": "AppImage"
     },
     "nsis": {
       "oneClick": false,
@@ -57,5 +59,9 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true
     }
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/ios": "^7.4.3"
   }
 }

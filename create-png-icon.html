@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create PNG Icon</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: #e8e8e8; }
+        canvas { border: 1px solid #444; margin: 10px; }
+        .download-btn { background: #00b4d8; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🎨 Create PNG App Icon</h1>
+    <p>Click the button below to download a 256x256 PNG icon for the app.</p>
+    
+    <canvas id="iconCanvas" width="256" height="256"></canvas>
+    <br>
+    <button class="download-btn" onclick="downloadIcon()">Download icon-256.png</button>
+    
+    <script>
+        function createIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            const size = 256;
+
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#00b4d8');
+            gradient.addColorStop(1, '#dc2626');
+
+            // Draw background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw calculator icon
+            ctx.fillStyle = 'white';
+            const iconSize = size * 0.6;
+            const iconX = (size - iconSize) / 2;
+            const iconY = (size - iconSize) / 2;
+
+            // Calculator body
+            ctx.fillRect(iconX, iconY, iconSize, iconSize * 0.8);
+            
+            // Calculator screen
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(iconX + iconSize * 0.1, iconY + iconSize * 0.1, iconSize * 0.8, iconSize * 0.2);
+            
+            // Buttons
+            ctx.fillStyle = '#00b4d8';
+            const buttonSize = iconSize * 0.15;
+            const buttonSpacing = iconSize * 0.2;
+            
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    ctx.fillRect(
+                        iconX + iconSize * 0.1 + col * buttonSpacing,
+                        iconY + iconSize * 0.4 + row * buttonSpacing,
+                        buttonSize,
+                        buttonSize
+                    );
+                }
+            }
+        }
+
+        function downloadIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const link = document.createElement('a');
+            link.download = 'icon-256.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Create the icon when page loads
+        createIcon();
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Combinatorics App Launcher</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%); 
+            color: #e8e8e8; 
+            text-align: center; 
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .launcher { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 40px; 
+            background: rgba(30, 30, 30, 0.95); 
+            border-radius: 16px; 
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .btn { 
+            background: linear-gradient(135deg, #00b4d8, #0096c7); 
+            color: white; 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 1.2rem; 
+            cursor: pointer; 
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6); 
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+        }
+        h1 {
+            color: #00b4d8;
+            margin-bottom: 1rem;
+        }
+        p {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="launcher">
+        <h1>🚗 Combinatorics App</h1>
+        <p>Interactive combinatorics learning with real-world problems, games, and data visualization</p>
+        
+        <button class="btn" onclick="window.open('index.html', '_blank')">
+            🚀 Launch Local App
+        </button>
+        <br><br>
+        
+        <button class="btn btn-secondary" onclick="window.open('https://sirsplove.github.io/Combinatorics_App/', '_blank')">
+            🌐 Open Online Version
+        </button>
+        <br><br>
+        
+        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 2rem;">
+            Available on all platforms: Web, Desktop, Mobile
+        </p>
+    </div>
+</body>
+</html>

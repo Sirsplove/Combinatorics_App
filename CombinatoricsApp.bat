@@ -1,0 +1,3 @@
+@echo off
+echo 🚀 Starting Combinatorics App...
+start "" "%~dp0index.html"
