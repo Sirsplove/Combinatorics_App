@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Icon Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: #e8e8e8; }
+        .icon-preview { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
+        .icon-size { text-align: center; }
+        .icon { border-radius: 12px; margin: 10px; }
+        canvas { border: 1px solid #444; }
+        .download-btn { background: #00b4d8; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Combinatorics App Icon Generator</h1>
+    <p>This tool generates app icons for all platforms. Click the buttons below to download the icons.</p>
+    
+    <div class="icon-preview" id="iconPreview"></div>
+    
+    <script>
+        // Icon sizes for different platforms
+        const iconSizes = {
+            'favicon': 16,
+            'android-36': 36,
+            'android-48': 48,
+            'android-72': 72,
+            'android-96': 96,
+            'android-144': 144,
+            'android-192': 192,
+            'ios-57': 57,
+            'ios-60': 60,
+            'ios-72': 72,
+            'ios-76': 76,
+            'ios-114': 114,
+            'ios-120': 120,
+            'ios-144': 144,
+            'ios-152': 152,
+            'ios-180': 180,
+            'desktop-256': 256,
+            'desktop-512': 512
+        };
+
+        function createIcon(size, name) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = size;
+            canvas.height = size;
+
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#00b4d8');
+            gradient.addColorStop(1, '#dc2626');
+
+            // Draw background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw calculator icon
+            ctx.fillStyle = 'white';
+            const iconSize = size * 0.6;
+            const iconX = (size - iconSize) / 2;
+            const iconY = (size - iconSize) / 2;
+
+            // Calculator body
+            ctx.fillRect(iconX, iconY, iconSize, iconSize * 0.8);
+            
+            // Calculator screen
+            ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(iconX + iconSize * 0.1, iconY + iconSize * 0.1, iconSize * 0.8, iconSize * 0.2);
+            
+            // Buttons
+            ctx.fillStyle = '#00b4d8';
+            const buttonSize = iconSize * 0.15;
+            const buttonSpacing = iconSize * 0.2;
+            
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    ctx.fillRect(
+                        iconX + iconSize * 0.1 + col * buttonSpacing,
+                        iconY + iconSize * 0.4 + row * buttonSpacing,
+                        buttonSize,
+                        buttonSize
+                    );
+                }
+            }
+
+            return canvas;
+        }
+
+        function downloadIcon(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Generate all icons
+        Object.entries(iconSizes).forEach(([name, size]) => {
+            const canvas = createIcon(size, name);
+            const container = document.createElement('div');
+            container.className = 'icon-size';
+            
+            container.innerHTML = `
+                <canvas class="icon" width="${size}" height="${size}"></canvas>
+                <div>${name} (${size}x${size})</div>
+                <button class="download-btn" onclick="downloadIcon(this.previousElementSibling.previousElementSibling, 'icon-${name}.png')">
+                    Download
+                </button>
+            `;
+            
+            // Copy canvas content
+            const newCanvas = container.querySelector('canvas');
+            const newCtx = newCanvas.getContext('2d');
+            newCtx.drawImage(canvas, 0, 0);
+            
+            document.getElementById('iconPreview').appendChild(container);
+        });
+
+        // Create favicon
+        function createFavicon() {
+            const canvas = createIcon(32, 'favicon');
+            const link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/png';
+            link.href = canvas.toDataURL();
+            document.head.appendChild(link);
+        }
+
+        createFavicon();
+    </script>
+</body>
+</html>

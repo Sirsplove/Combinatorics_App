@@ -112,3 +112,31 @@ Thumbs.db
 
 # Local development
 .local
+
+# Build outputs
+dist/
+build/
+out/
+
+# Electron build files
+*.exe
+*.dmg
+*.AppImage
+*.deb
+*.rpm
+
+# Mobile build files
+android/
+ios/
+platforms/
+
+# Capacitor
+.capacitor/
+
+# App icons (generated)
+assets/icon.*
+icon-*.png
+
+# Temporary files
+*.tmp
+*.temp
