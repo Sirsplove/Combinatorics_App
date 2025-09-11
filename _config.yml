@@ -1,4 +1,6 @@
-# Disable Jekyll processing
+# Disable Jekyll processing completely
 plugins: []
 markdown: kramdown
 highlighter: rouge
+exclude: ["_config.yml", "README.md", "package.json", "package-lock.json", "node_modules", "dist", "build", "out", ".git", ".github", ".nojekyll", "main.js", "capacitor.config.json", "mobile-app.js", "build-instructions.md", "create-icons.html", "quick-start.bat", "quick-start.sh", "generate-icons.js", "create-png-icon.html", "CombinatoricsApp.bat", "launcher.html", "DISTRIBUTION-GUIDE.md", "android", "ios", "platforms", ".capacitor", "assets"]
+include: ["index.html", "styles.css", "script.js", "manifest.json", "sw.js"]
