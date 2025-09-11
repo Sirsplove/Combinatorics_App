@@ -356,16 +356,11 @@ function closeMobileGame() {
 }
 
 
-// Show problem in popup (desktop) or full-screen page (mobile)
+// Show problem in popup (desktop) or page (mobile)
 function showProblem(problemId) {
     console.log('showProblem called with:', problemId);
     
-    // On mobile, show as full-screen page instead of popup
-    if (isMobile()) {
-        startMobileProblem(problemId);
-        return;
-    }
-    
+    // On mobile, show as popup (same as desktop)
     const problem = problems[problemId];
     if (!problem) {
         console.log('Problem not found:', problemId);
@@ -411,15 +406,9 @@ function showProblem(problemId) {
     document.body.appendChild(popup);
 }
 
-// Show learning content in popup (desktop) or full-screen page (mobile)
+// Show learning content in popup (desktop and mobile)
 function showLearningContent(contentId) {
     console.log('showLearningContent called with:', contentId);
-    
-    // On mobile, show as full-screen page instead of popup
-    if (isMobile()) {
-        startMobileLearning(contentId);
-        return;
-    }
     
     const content = learningContent[contentId];
     if (!content) {
@@ -460,107 +449,7 @@ function closePopup(popupId) {
     }
 }
 
-// Mobile problem full-screen mode
-function startMobileProblem(problemId) {
-    if (!isMobile()) {
-        showProblem(problemId);
-        return;
-    }
-    
-    const problem = problems[problemId];
-    if (!problem) return;
-    
-    // Create fullscreen problem container
-    const fullscreenContainer = document.createElement('div');
-    fullscreenContainer.className = 'mobile-problem-fullscreen';
-    fullscreenContainer.id = 'mobile-problem-container';
-    
-    fullscreenContainer.innerHTML = `
-        <div class="mobile-problem-header">
-            <h3>${problem.title}</h3>
-            <button class="btn btn-outline" onclick="closeMobileProblem()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="mobile-problem-content" id="mobile-problem-content"></div>
-    `;
-    
-    document.body.appendChild(fullscreenContainer);
-    
-    // Generate problem content
-    const mobileProblemContent = document.getElementById('mobile-problem-content');
-    
-    let html = `
-        <div class="problem-scenario">
-            <h4>Scenario:</h4>
-            <p>${problem.scenario}</p>
-        </div>
-        
-        <div class="problem-approach">
-            <h4>Combinatorics Approach:</h4>
-            <p>${problem.approach}</p>
-        </div>
-        
-        <div class="problem-solution">
-            <h4>Solution:</h4>
-            <p>${problem.solution}</p>
-        </div>
-        
-        <div class="problem-actions">
-            <button class="btn btn-primary" onclick="solveProblem('${problemId}'); closeMobileProblem();">
-                Mark as Solved
-            </button>
-        </div>
-    `;
-    
-    mobileProblemContent.innerHTML = html;
-}
-
-function closeMobileProblem() {
-    const container = document.getElementById('mobile-problem-container');
-    if (container) {
-        container.remove();
-    }
-}
-
-// Mobile learning full-screen mode
-function startMobileLearning(contentId) {
-    if (!isMobile()) {
-        showLearningContent(contentId);
-        return;
-    }
-    
-    const content = learningContent[contentId];
-    if (!content) return;
-    
-    // Create fullscreen learning container
-    const fullscreenContainer = document.createElement('div');
-    fullscreenContainer.className = 'mobile-learning-fullscreen';
-    fullscreenContainer.id = 'mobile-learning-container';
-    
-    fullscreenContainer.innerHTML = `
-        <div class="mobile-learning-header">
-            <h3>${content.title}</h3>
-            <button class="btn btn-outline" onclick="closeMobileLearning()">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-        <div class="mobile-learning-content" id="mobile-learning-content"></div>
-    `;
-    
-    document.body.appendChild(fullscreenContainer);
-    
-    // Generate learning content
-    const mobileLearningContent = document.getElementById('mobile-learning-content');
-    mobileLearningContent.innerHTML = content.content;
-}
-
-function closeMobileLearning() {
-    const container = document.getElementById('mobile-learning-container');
-    if (container) {
-        container.remove();
-    }
-}
+// Mobile full-screen functions removed - using popups for both desktop and mobile
 
 // Learning content
 const learningContent = {
