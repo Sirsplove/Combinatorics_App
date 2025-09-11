@@ -432,28 +432,44 @@ function startMobileGame(gameType) {
     
     document.body.appendChild(fullscreenContainer);
     
-    // Start the game in mobile content area
+    // Set current game and score
+    currentGame = gameType;
+    gameScore = 0;
+    
+    // Generate the game content directly in mobile container
     const mobileGameContent = document.getElementById('mobile-game-content');
-    const originalGameContent = document.getElementById('game-content');
     
-    // Temporarily replace game content
-    const tempContent = originalGameContent.innerHTML;
-    originalGameContent.innerHTML = '';
-    originalGameContent.appendChild(mobileGameContent);
-    
-    // Start the game
-    game.start();
-    
-    // Move content back to mobile container
-    const gameHTML = originalGameContent.innerHTML;
-    mobileGameContent.innerHTML = gameHTML;
-    originalGameContent.innerHTML = tempContent;
+    // Call the game's start function with mobile content
+    if (game.start) {
+        // Temporarily set the game content to mobile container
+        const originalGameContent = document.getElementById('game-content');
+        const tempId = originalGameContent.id;
+        originalGameContent.id = 'temp-game-content';
+        mobileGameContent.id = 'game-content';
+        
+        // Start the game
+        game.start();
+        
+        // Restore original IDs
+        originalGameContent.id = tempId;
+        mobileGameContent.id = 'mobile-game-content';
+    }
 }
 
 function closeMobileGame() {
     const container = document.getElementById('mobile-game-container');
     if (container) {
         container.remove();
+    }
+    
+    // Reset game state
+    currentGame = null;
+    gameScore = 0;
+    
+    // Hide the main game workspace
+    const workspace = document.getElementById('game-workspace');
+    if (workspace) {
+        workspace.style.display = 'none';
     }
 }
 
