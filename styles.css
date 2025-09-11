@@ -8,8 +8,8 @@
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #e8e8e8;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
     min-height: 100vh;
 }
 
@@ -43,10 +43,10 @@ body {
     gap: 0.5rem;
 }
 
-.btn-help, .btn-tour {
+.btn-help, .btn-tour, .btn-theme {
     background: transparent;
-    border: 2px solid #667eea;
-    color: #667eea;
+    border: 2px solid #00b4d8;
+    color: #00b4d8;
     padding: 0.5rem;
     border-radius: 8px;
     cursor: pointer;
@@ -54,15 +54,15 @@ body {
     font-size: 1.1rem;
 }
 
-.btn-help:hover, .btn-tour:hover {
-    background: #667eea;
+.btn-help:hover, .btn-tour:hover, .btn-theme:hover {
+    background: #00b4d8;
     color: white;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #667eea;
+    color: #00b4d8;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -84,8 +84,8 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: #667eea;
-    background: rgba(102, 126, 234, 0.1);
+    color: #00b4d8;
+    background: rgba(0, 180, 216, 0.1);
 }
 
 .nav-link[data-tooltip]:hover::after {
@@ -167,35 +167,35 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    background: linear-gradient(135deg, #00b4d8, #0096c7);
     color: white;
-    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 180, 216, 0.4);
 }
 
 .btn-secondary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 180, 216, 0.6);
 }
 
 .btn-outline {
     background: transparent;
-    color: #667eea;
-    border: 2px solid #667eea;
+    color: #00b4d8;
+    border: 2px solid #00b4d8;
 }
 
 .btn-outline:hover {
-    background: #667eea;
+    background: #00b4d8;
     color: white;
 }
 
@@ -208,33 +208,36 @@ body {
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 30, 30, 0.95);
     padding: 2rem;
     border-radius: 16px;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
+    border-color: rgba(0, 180, 216, 0.5);
+    box-shadow: 0 12px 40px rgba(0, 180, 216, 0.2);
 }
 
 .feature-card i {
     font-size: 3rem;
-    color: #667eea;
+    color: #00b4d8;
     margin-bottom: 1rem;
 }
 
 .feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #e8e8e8;
 }
 
 .feature-card p {
-    color: #666;
+    color: #b0b0b0;
     line-height: 1.6;
 }
 
@@ -247,34 +250,36 @@ body {
 }
 
 .category-card {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .category-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 180, 216, 0.2);
+    border-color: rgba(0, 180, 216, 0.5);
 }
 
 .category-card i {
     font-size: 3rem;
-    color: #667eea;
+    color: #00b4d8;
     margin-bottom: 1rem;
 }
 
 .category-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #e8e8e8;
 }
 
 .category-card p {
-    color: #666;
+    color: #b0b0b0;
     line-height: 1.6;
 }
 
@@ -288,7 +293,7 @@ body {
 }
 
 .problem-header {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
     color: white;
     padding: 1.5rem 2rem;
     display: flex;
@@ -309,35 +314,37 @@ body {
 }
 
 .game-card {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
     position: relative;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .game-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 180, 216, 0.2);
+    border-color: rgba(0, 180, 216, 0.5);
 }
 
 .game-card i {
     font-size: 3rem;
-    color: #667eea;
+    color: #00b4d8;
     margin-bottom: 1rem;
 }
 
 .game-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #e8e8e8;
 }
 
 .game-card p {
-    color: #666;
+    color: #b0b0b0;
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -346,7 +353,7 @@ body {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: #4ecdc4;
+    background: #dc2626;
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
@@ -364,7 +371,7 @@ body {
 }
 
 .game-header {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    background: linear-gradient(135deg, #00b4d8, #0096c7);
     color: white;
     padding: 1.5rem 2rem;
     display: flex;
@@ -407,35 +414,38 @@ body {
 
 .input-group label {
     font-weight: 600;
-    color: #333;
+    color: #e8e8e8;
 }
 
 .input-group select,
 .input-group input {
     padding: 0.75rem;
-    border: 2px solid #e1e5e9;
+    border: 2px solid #333;
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    background: #2a2a2a;
+    color: #e8e8e8;
 }
 
 .input-group select:focus,
 .input-group input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #00b4d8;
 }
 
 .calc-result {
-    background: #f8f9fa;
+    background: rgba(30, 30, 30, 0.8);
     padding: 2rem;
     border-radius: 12px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #00b4d8;
+    color: #e8e8e8;
 }
 
 .answer {
     font-size: 2rem;
     font-weight: 700;
-    color: #667eea;
+    color: #00b4d8;
     margin: 1rem 0;
 }
 
@@ -444,7 +454,7 @@ body {
 }
 
 .explanation h4 {
-    color: #333;
+    color: #e8e8e8;
     margin-bottom: 1rem;
 }
 
@@ -497,7 +507,7 @@ body {
 }
 
 .module-header {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
     color: white;
     padding: 1.5rem 2rem;
     display: flex;
@@ -511,27 +521,28 @@ body {
 }
 
 .module-text h4 {
-    color: #333;
+    color: #e8e8e8;
     margin: 1.5rem 0 1rem 0;
 }
 
 .module-text p {
     margin-bottom: 1rem;
-    color: #666;
+    color: #b0b0b0;
 }
 
 /* Quick Start Guide */
 .quick-start {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(30, 30, 30, 0.95);
     border-radius: 16px;
     padding: 2rem;
     margin: 2rem 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .quick-start h3 {
     text-align: center;
-    color: #333;
+    color: #e8e8e8;
     margin-bottom: 2rem;
     font-size: 1.5rem;
 }
@@ -547,13 +558,13 @@ body {
     gap: 1rem;
     align-items: flex-start;
     padding: 1.5rem;
-    background: #f8f9fa;
+    background: rgba(40, 40, 40, 0.8);
     border-radius: 12px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #00b4d8;
 }
 
 .step-number {
-    background: #667eea;
+    background: #00b4d8;
     color: white;
     width: 30px;
     height: 30px;
@@ -571,12 +582,12 @@ body {
 
 .step-content strong {
     display: block;
-    color: #333;
+    color: #e8e8e8;
     margin-bottom: 0.5rem;
 }
 
 .step-content p {
-    color: #666;
+    color: #b0b0b0;
     margin-bottom: 1rem;
     font-size: 0.9rem;
 }
@@ -604,17 +615,18 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: #1a1a1a;
     border-radius: 16px;
     max-width: 600px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 180, 216, 0.3);
 }
 
 .modal-header {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
     color: white;
     padding: 1.5rem 2rem;
     border-radius: 16px 16px 0 0;
@@ -662,7 +674,7 @@ body {
 }
 
 .help-section h3 {
-    color: #667eea;
+    color: #00b4d8;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -676,8 +688,8 @@ body {
 
 .help-section li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    color: #666;
+    border-bottom: 1px solid #333;
+    color: #b0b0b0;
 }
 
 .help-section li:last-child {
@@ -695,20 +707,20 @@ body {
 .stat-item {
     text-align: center;
     padding: 1.5rem;
-    background: #f8f9fa;
+    background: rgba(40, 40, 40, 0.8);
     border-radius: 12px;
-    border: 2px solid #e1e5e9;
+    border: 2px solid rgba(0, 180, 216, 0.3);
 }
 
 .stat-number {
     font-size: 2rem;
     font-weight: bold;
-    color: #667eea;
+    color: #00b4d8;
     margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    color: #666;
+    color: #b0b0b0;
     font-size: 0.9rem;
 }
 
@@ -717,7 +729,7 @@ body {
 }
 
 .achievements h3 {
-    color: #333;
+    color: #e8e8e8;
     margin-bottom: 1rem;
 }
 
@@ -732,9 +744,9 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: #f8f9fa;
+    background: rgba(40, 40, 40, 0.8);
     border-radius: 8px;
-    border-left: 4px solid #4ecdc4;
+    border-left: 4px solid #00b4d8;
 }
 
 .achievement.locked {
@@ -743,7 +755,7 @@ body {
 }
 
 .achievement i {
-    color: #4ecdc4;
+    color: #00b4d8;
     font-size: 1.2rem;
 }
 
@@ -766,12 +778,13 @@ body {
 }
 
 .tour-content {
-    background: white;
+    background: #1a1a1a;
     border-radius: 16px;
     padding: 2rem;
     max-width: 500px;
     width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 180, 216, 0.3);
 }
 
 .tour-header {
@@ -782,11 +795,11 @@ body {
 }
 
 .tour-progress {
-    background: #f8f9fa;
+    background: rgba(40, 40, 40, 0.8);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
-    color: #666;
+    color: #b0b0b0;
 }
 
 .tour-body {
@@ -821,45 +834,49 @@ body {
     gap: 1rem;
 }
 
-/* Dark Theme */
+/* Dark Theme - Audi Inspired */
 .dark-theme {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: #ecf0f1;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    color: #e8e8e8;
 }
 
 .dark-theme .header {
-    background: rgba(44, 62, 80, 0.95);
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .dark-theme .feature-card,
 .dark-theme .category-card,
 .dark-theme .game-card,
 .dark-theme .module-card {
-    background: rgba(52, 73, 94, 0.95);
-    color: #ecf0f1;
+    background: rgba(20, 20, 20, 0.95);
+    color: #e8e8e8;
+    border: 1px solid rgba(0, 180, 216, 0.1);
 }
 
 .dark-theme .problem-workspace,
 .dark-theme .game-workspace,
 .dark-theme .calculator-workspace,
 .dark-theme .module-content {
-    background: rgba(52, 73, 94, 0.95);
-    color: #ecf0f1;
+    background: rgba(20, 20, 20, 0.95);
+    color: #e8e8e8;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .dark-theme .modal-content {
-    background: #34495e;
-    color: #ecf0f1;
+    background: #0a0a0a;
+    color: #e8e8e8;
+    border: 1px solid rgba(0, 180, 216, 0.3);
 }
 
 .dark-theme .btn-outline {
-    border-color: #3498db;
-    color: #3498db;
+    border-color: #00b4d8;
+    color: #00b4d8;
 }
 
 .dark-theme .btn-outline:hover {
-    background: #3498db;
-    color: #2c3e50;
+    background: #00b4d8;
+    color: #0a0a0a;
 }
 
 /* Advanced Game Styles */
