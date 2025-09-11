@@ -21,14 +21,15 @@ body {
 
 /* Header */
 .header {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+    border-bottom: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .header .container {
@@ -75,7 +76,7 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: #666;
+    color: #e0e0e0;
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -285,11 +286,12 @@ body {
 
 /* Problem Workspace */
 .problem-workspace {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     margin-top: 2rem;
     overflow: hidden;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .problem-header {
@@ -303,6 +305,8 @@ body {
 
 .problem-content {
     padding: 2rem;
+    color: #f0f0f0;
+    line-height: 1.7;
 }
 
 /* Games Grid */
@@ -363,11 +367,12 @@ body {
 
 /* Game Workspace */
 .game-workspace {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     margin-top: 2rem;
     overflow: hidden;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .game-header {
@@ -388,6 +393,8 @@ body {
 .game-content {
     padding: 2rem;
     min-height: 400px;
+    color: #f0f0f0;
+    line-height: 1.7;
 }
 
 /* Calculator */
@@ -657,6 +664,8 @@ body {
 
 .modal-body {
     padding: 2rem;
+    color: #f0f0f0;
+    line-height: 1.7;
 }
 
 .welcome-options {
@@ -664,6 +673,24 @@ body {
     gap: 1rem;
     justify-content: center;
     margin-top: 2rem;
+}
+
+/* Modal Text Improvements */
+.modal-body p {
+    color: #f0f0f0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.modal-body h2, .modal-body h3, .modal-body h4 {
+    color: #e8e8e8;
+    margin-bottom: 1rem;
+}
+
+.modal-body strong {
+    color: #00b4d8;
+    font-weight: 600;
 }
 
 /* Help Modal */
@@ -679,6 +706,8 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .help-section ul {
@@ -688,8 +717,9 @@ body {
 
 .help-section li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid #333;
-    color: #b0b0b0;
+    border-bottom: 1px solid #444;
+    color: #e0e0e0;
+    font-size: 1rem;
 }
 
 .help-section li:last-child {
@@ -747,6 +777,7 @@ body {
     background: rgba(40, 40, 40, 0.8);
     border-radius: 8px;
     border-left: 4px solid #00b4d8;
+    color: #e0e0e0;
 }
 
 .achievement.locked {
@@ -804,6 +835,9 @@ body {
 
 .tour-body {
     margin-bottom: 2rem;
+    color: #f0f0f0;
+    line-height: 1.7;
+    font-size: 1rem;
 }
 
 .tour-actions {
@@ -814,11 +848,12 @@ body {
 
 /* Footer */
 .footer {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(10px);
     padding: 2rem 0;
-    color: #666;
+    color: #e0e0e0;
     margin-top: 4rem;
+    border-top: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .footer-content {
