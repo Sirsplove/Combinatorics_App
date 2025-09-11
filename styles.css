@@ -399,11 +399,12 @@ body {
 
 /* Calculator */
 .calculator-workspace {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     padding: 2rem;
     margin-top: 2rem;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .calc-inputs {
@@ -474,43 +475,46 @@ body {
 }
 
 .module-card {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .module-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 180, 216, 0.2);
+    border-color: rgba(0, 180, 216, 0.5);
 }
 
 .module-card i {
     font-size: 3rem;
-    color: #667eea;
+    color: #00b4d8;
     margin-bottom: 1rem;
 }
 
 .module-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: #e8e8e8;
 }
 
 .module-card p {
-    color: #666;
+    color: #b0b0b0;
     line-height: 1.6;
 }
 
 .module-content {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     margin-top: 2rem;
     overflow: hidden;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .module-header {
@@ -844,6 +848,56 @@ body {
     display: flex;
     gap: 1rem;
     justify-content: space-between;
+}
+
+/* Achievement Notifications */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.achievement-notification {
+    animation: slideIn 0.5s ease-out;
+}
+
+.achievement-notification .achievement-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.achievement-notification .achievement-content i {
+    font-size: 1.5rem;
+    color: #00b4d8;
+}
+
+.achievement-notification .achievement-content strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.achievement-notification .achievement-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 /* Footer */

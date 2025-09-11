@@ -1255,9 +1255,22 @@ function updateProgressDisplay() {
     
     // Update achievements
     const achievements = document.querySelectorAll('.achievement');
-    achievements[0].classList.toggle('locked', !userProgress.achievements.firstProblem);
-    achievements[1].classList.toggle('locked', !userProgress.achievements.gameMaster);
-    achievements[2].classList.toggle('locked', !userProgress.achievements.calculatorPro);
+    if (achievements.length >= 3) {
+        achievements[0].classList.toggle('locked', !userProgress.achievements.firstProblem);
+        achievements[1].classList.toggle('locked', !userProgress.achievements.gameMaster);
+        achievements[2].classList.toggle('locked', !userProgress.achievements.calculatorPro);
+        
+        // Update icons for unlocked achievements
+        if (userProgress.achievements.firstProblem) {
+            achievements[0].querySelector('i').className = 'fas fa-check-circle';
+        }
+        if (userProgress.achievements.gameMaster) {
+            achievements[1].querySelector('i').className = 'fas fa-gamepad';
+        }
+        if (userProgress.achievements.calculatorPro) {
+            achievements[2].querySelector('i').className = 'fas fa-calculator';
+        }
+    }
 }
 
 // Tour Functions
@@ -1355,19 +1368,20 @@ function showAchievement(title, description) {
         </div>
     `;
     
-    // Add styles
+    // Add styles with Audi-inspired colors
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        background: linear-gradient(135deg, #dc2626, #b91c1c);
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4);
         z-index: 4000;
         animation: slideIn 0.5s ease-out;
         max-width: 300px;
+        border: 1px solid rgba(0, 180, 216, 0.3);
     `;
     
     document.body.appendChild(notification);
