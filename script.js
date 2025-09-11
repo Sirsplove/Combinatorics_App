@@ -51,6 +51,12 @@ const tourSteps = [
 
 // Navigation
 function showSection(sectionId) {
+    // Use mobile full-screen mode for problems and learning on mobile
+    if (isMobile() && (sectionId === 'problems' || sectionId === 'learn')) {
+        startMobileSection(sectionId);
+        return;
+    }
+    
     // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
@@ -470,6 +476,67 @@ function closeMobileGame() {
     const workspace = document.getElementById('game-workspace');
     if (workspace) {
         workspace.style.display = 'none';
+    }
+}
+
+// Mobile section fullscreen mode (for problems and learning)
+function startMobileSection(sectionId) {
+    if (!isMobile()) {
+        showSection(sectionId);
+        return;
+    }
+    
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    
+    // Create fullscreen section container
+    const fullscreenContainer = document.createElement('div');
+    fullscreenContainer.className = 'section-fullscreen';
+    fullscreenContainer.id = 'mobile-section-container';
+    
+    // Get section title
+    const sectionTitles = {
+        'problems': 'Real-World Problems',
+        'learn': 'Learning Center'
+    };
+    
+    fullscreenContainer.innerHTML = `
+        <div class="section-header">
+            <h3>${sectionTitles[sectionId] || sectionId}</h3>
+            <button class="btn btn-outline" onclick="closeMobileSection()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="section-content" id="mobile-section-content"></div>
+    `;
+    
+    document.body.appendChild(fullscreenContainer);
+    
+    // Copy section content to mobile container
+    const mobileSectionContent = document.getElementById('mobile-section-content');
+    const originalContent = section.innerHTML;
+    mobileSectionContent.innerHTML = originalContent;
+    
+    // Update mobile navigation active state
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    const sectionMap = {
+        'problems': 1,
+        'learn': 4
+    };
+    
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+    if (mobileNavItems[sectionMap[sectionId]]) {
+        mobileNavItems[sectionMap[sectionId]].classList.add('active');
+    }
+}
+
+function closeMobileSection() {
+    const container = document.getElementById('mobile-section-container');
+    if (container) {
+        container.remove();
     }
 }
 
