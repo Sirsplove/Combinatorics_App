@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinatorics App - Real World Problems & Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-calculator"></i>
+                Combinatorics App
+            </h1>
+            <nav class="nav">
+                <a href="#home" class="nav-link active" data-tooltip="Start here! Overview of the app">Home</a>
+                <a href="#problems" class="nav-link" data-tooltip="Solve real-world problems">Real Problems</a>
+                <a href="#games" class="nav-link" data-tooltip="Play interactive games">Games</a>
+                <a href="#calculator" class="nav-link" data-tooltip="Calculate permutations & combinations">Calculator</a>
+                <a href="#learn" class="nav-link" data-tooltip="Learn the fundamentals">Learn</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-help" onclick="showHelp()" title="Get Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <button class="btn-tour" onclick="startTour()" title="Take a Tour">
+                    <i class="fas fa-map-marked-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Welcome Modal -->
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Welcome to Combinatorics App! 🎉</h2>
+                    <button class="modal-close" onclick="closeWelcomeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Ready to master combinatorics through real-world problems and fun games?</p>
+                    <div class="welcome-options">
+                        <button class="btn btn-primary" onclick="startTour(); closeWelcomeModal();">
+                            <i class="fas fa-map-marked-alt"></i> Take a Tour
+                        </button>
+                        <button class="btn btn-secondary" onclick="closeWelcomeModal()">
+                            <i class="fas fa-play"></i> Start Exploring
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <h2>Master Combinatorics Through Real-World Applications</h2>
+                    <p>Solve practical problems and play engaging games to strengthen your combinatorial thinking skills.</p>
+                    
+                    <!-- Quick Start Guide -->
+                    <div class="quick-start">
+                        <h3>🚀 Quick Start Guide</h3>
+                        <div class="start-steps">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <strong>Learn the Basics</strong>
+                                    <p>Start with fundamentals to understand key concepts</p>
+                                    <button class="btn btn-small" onclick="showSection('learn')">Start Learning</button>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <strong>Try the Calculator</strong>
+                                    <p>Practice with permutations, combinations, and more</p>
+                                    <button class="btn btn-small" onclick="showSection('calculator')">Open Calculator</button>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <strong>Solve Real Problems</strong>
+                                    <p>Apply your knowledge to practical scenarios</p>
+                                    <button class="btn btn-small" onclick="showSection('problems')">View Problems</button>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <strong>Play Games</strong>
+                                    <p>Have fun while reinforcing your skills</p>
+                                    <button class="btn btn-small" onclick="showSection('games')">Play Games</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showSection('problems')">
+                            <i class="fas fa-tools"></i> Solve Real Problems
+                        </button>
+                        <button class="btn btn-secondary" onclick="showSection('games')">
+                            <i class="fas fa-gamepad"></i> Play Games
+                        </button>
+                        <button class="btn btn-outline" onclick="startTour()">
+                            <i class="fas fa-map-marked-alt"></i> Take a Tour
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Real-World Applications</h3>
+                        <p>Solve scheduling, optimization, and counting problems from everyday life</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <h3>Interactive Games</h3>
+                        <p>Engage with fun puzzles and challenges that build combinatorial intuition</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Visual Learning</h3>
+                        <p>Step-by-step solutions with interactive visualizations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real Problems Section -->
+        <section id="problems" class="section">
+            <div class="container">
+                <h2>Real-World Combinatorics Problems</h2>
+                <div class="problem-categories">
+                    <div class="category-card" onclick="loadProblem('scheduling')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Scheduling Problems</h3>
+                        <p>Optimize schedules, minimize conflicts, and maximize efficiency</p>
+                    </div>
+                    <div class="category-card" onclick="loadProblem('optimization')">
+                        <i class="fas fa-route"></i>
+                        <h3>Route Optimization</h3>
+                        <p>Find optimal paths, minimize travel time, and reduce costs</p>
+                    </div>
+                    <div class="category-card" onclick="loadProblem('counting')">
+                        <i class="fas fa-list-ol"></i>
+                        <h3>Counting Problems</h3>
+                        <p>Count arrangements, selections, and configurations</p>
+                    </div>
+                    <div class="category-card" onclick="loadProblem('probability')">
+                        <i class="fas fa-dice"></i>
+                        <h3>Probability & Risk</h3>
+                        <p>Calculate probabilities and assess risks in decision making</p>
+                    </div>
+                </div>
+                
+                <div id="problem-workspace" class="problem-workspace" style="display: none;">
+                    <div class="problem-header">
+                        <h3 id="problem-title"></h3>
+                        <button class="btn btn-outline" onclick="closeProblem()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    <div id="problem-content" class="problem-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games" class="section">
+            <div class="container">
+                <h2>Combinatorics Games</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="startGame('permutation-puzzle')">
+                        <i class="fas fa-shuffle"></i>
+                        <h3>Permutation Puzzle</h3>
+                        <p>Arrange items in different orders and discover patterns</p>
+                        <div class="difficulty">Easy</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('combination-challenge')">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Combination Challenge</h3>
+                        <p>Select groups of items and explore selection strategies</p>
+                        <div class="difficulty">Medium</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('probability-roulette')">
+                        <i class="fas fa-circle-notch"></i>
+                        <h3>Probability Roulette</h3>
+                        <p>Predict outcomes and calculate probabilities in real-time</p>
+                        <div class="difficulty">Medium</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('graph-traversal')">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Graph Traversal</h3>
+                        <p>Navigate networks and find optimal paths</p>
+                        <div class="difficulty">Hard</div>
+                    </div>
+                </div>
+                
+                <div id="game-workspace" class="game-workspace" style="display: none;">
+                    <div class="game-header">
+                        <h3 id="game-title"></h3>
+                        <div class="game-stats">
+                            <span id="score">Score: 0</span>
+                            <span id="level">Level: 1</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="closeGame()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    <div id="game-content" class="game-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="section">
+            <div class="container">
+                <h2>Combinatorics Calculator</h2>
+                <div class="calculator-workspace">
+                    <div class="calc-inputs">
+                        <div class="input-group">
+                            <label for="calc-type">Calculation Type:</label>
+                            <select id="calc-type" onchange="updateCalculator()">
+                                <option value="permutation">Permutation (nPr)</option>
+                                <option value="combination">Combination (nCr)</option>
+                                <option value="factorial">Factorial (n!)</option>
+                                <option value="subsets">Number of Subsets</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="n-value">n (total items):</label>
+                            <input type="number" id="n-value" min="0" max="100" value="5" onchange="updateCalculator()">
+                        </div>
+                        <div class="input-group" id="r-group">
+                            <label for="r-value">r (selected items):</label>
+                            <input type="number" id="r-value" min="0" max="100" value="3" onchange="updateCalculator()">
+                        </div>
+                    </div>
+                    <div class="calc-result">
+                        <h3>Result:</h3>
+                        <div id="calc-answer" class="answer">120</div>
+                        <div id="calc-explanation" class="explanation">
+                            <h4>Step-by-step solution:</h4>
+                            <div id="calc-steps"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn Section -->
+        <section id="learn" class="section">
+            <div class="container">
+                <h2>Learn Combinatorics</h2>
+                <div class="learning-modules">
+                    <div class="module-card" onclick="showModule('basics')">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Fundamentals</h3>
+                        <p>Basic principles of counting, permutations, and combinations</p>
+                    </div>
+                    <div class="module-card" onclick="showModule('advanced')">
+                        <i class="fas fa-brain"></i>
+                        <h3>Advanced Topics</h3>
+                        <p>Generating functions, recurrence relations, and graph theory</p>
+                    </div>
+                    <div class="module-card" onclick="showModule('applications')">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Applications</h3>
+                        <p>Real-world uses in computer science, biology, and economics</p>
+                    </div>
+                </div>
+                
+                <div id="module-content" class="module-content" style="display: none;">
+                    <div class="module-header">
+                        <h3 id="module-title"></h3>
+                        <button class="btn btn-outline" onclick="closeModule()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    <div id="module-text" class="module-text"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Help & Tips 💡</h2>
+                <button class="modal-close" onclick="closeHelpModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="help-sections">
+                    <div class="help-section">
+                        <h3><i class="fas fa-home"></i> Getting Started</h3>
+                        <ul>
+                            <li>Start with the <strong>Learn</strong> section to understand the basics</li>
+                            <li>Use the <strong>Calculator</strong> to practice calculations</li>
+                            <li>Try <strong>Real Problems</strong> to apply your knowledge</li>
+                            <li>Play <strong>Games</strong> to reinforce learning</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3><i class="fas fa-keyboard"></i> Navigation Tips</h3>
+                        <ul>
+                            <li>Click navigation links to switch between sections</li>
+                            <li>Use the <strong>Tour</strong> button for a guided walkthrough</li>
+                            <li>Hover over navigation items for quick descriptions</li>
+                            <li>All features work on mobile devices too!</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3><i class="fas fa-gamepad"></i> Game Tips</h3>
+                        <ul>
+                            <li><strong>Permutation Puzzle:</strong> Click two items to swap them</li>
+                            <li><strong>Combination Challenge:</strong> Select items that sum to the target</li>
+                            <li><strong>Probability Roulette:</strong> Enter probabilities as decimals (0.5 for 50%)</li>
+                            <li><strong>Graph Traversal:</strong> Click connected nodes to build your path</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Modal -->
+    <div id="progress-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Progress 📊</h2>
+                <button class="modal-close" onclick="closeProgressModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="problems-solved">0</div>
+                        <div class="stat-label">Problems Solved</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="games-completed">0</div>
+                        <div class="stat-label">Games Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="calculations-done">0</div>
+                        <div class="stat-label">Calculations Done</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-score">0</div>
+                        <div class="stat-label">Total Score</div>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <h3>Achievements 🏆</h3>
+                    <div id="achievements-list" class="achievements-list">
+                        <div class="achievement locked">
+                            <i class="fas fa-lock"></i>
+                            <span>First Problem - Solve your first real-world problem</span>
+                        </div>
+                        <div class="achievement locked">
+                            <i class="fas fa-lock"></i>
+                            <span>Game Master - Complete all games</span>
+                        </div>
+                        <div class="achievement locked">
+                            <i class="fas fa-lock"></i>
+                            <span>Calculator Pro - Use calculator 10 times</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour Overlay -->
+    <div id="tour-overlay" class="tour-overlay" style="display: none;">
+        <div class="tour-content">
+            <div class="tour-header">
+                <h3 id="tour-title">Welcome to Combinatorics App!</h3>
+                <div class="tour-progress">
+                    <span id="tour-step">1</span> of <span id="tour-total">5</span>
+                </div>
+            </div>
+            <div class="tour-body">
+                <p id="tour-description">Let's take a quick tour to get you started!</p>
+            </div>
+            <div class="tour-actions">
+                <button class="btn btn-outline" onclick="previousTourStep()" id="tour-prev" style="display: none;">Previous</button>
+                <button class="btn btn-primary" onclick="nextTourStep()" id="tour-next">Next</button>
+                <button class="btn btn-secondary" onclick="endTour()" id="tour-skip">Skip Tour</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Combinatorics App. Learn, practice, and master combinatorial thinking!</p>
+                <div class="footer-actions">
+                    <button class="btn btn-small btn-outline" onclick="showProgressModal()">
+                        <i class="fas fa-chart-line"></i> View Progress
+                    </button>
+                    <button class="btn btn-small btn-outline" onclick="showHelp()">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
