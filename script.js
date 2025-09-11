@@ -262,8 +262,7 @@ function loadProblem(problemType) {
     
     title.textContent = problem.title;
     
-    // Track problem viewing
-    updateProgress('problem');
+    // Problem loaded - no progress tracking yet
     
     let html = `
         <div class="problem-scenario">
@@ -358,11 +357,27 @@ function loadProblem(problemType) {
         `;
     }
     
+    // Add solve button
+    html += `
+        <div class="problem-actions" style="margin-top: 2rem; text-align: center;">
+            <button class="btn btn-primary" onclick="solveProblem()">
+                <i class="fas fa-check"></i> Mark as Solved
+            </button>
+        </div>
+    `;
+    
     content.innerHTML = html;
     workspace.style.display = 'block';
 }
 
 function closeProblem() {
+    document.getElementById('problem-workspace').style.display = 'none';
+}
+
+function solveProblem() {
+    // Mark problem as solved
+    updateProgress('problem');
+    showAchievement('Problem Solver', 'Great job solving this real-world problem!');
     document.getElementById('problem-workspace').style.display = 'none';
 }
 
@@ -756,8 +771,7 @@ function startGame(gameType) {
     updateGameStats();
     game.start();
     
-    // Track game start
-    updateProgress('game');
+    // Game started - no progress tracking yet
 }
 
 function closeGame() {
@@ -885,6 +899,7 @@ function checkCombination() {
         gameScore += 100;
         updateGameStats();
         updateProgress('score', 100);
+        updateProgress('game'); // Track game completion
     } else if (selectedCount !== 3) {
         document.getElementById('status').textContent = 'Please select exactly 3 items';
     } else {
@@ -919,6 +934,7 @@ function checkPredictions() {
         gameScore += 150;
         updateGameStats();
         updateProgress('score', 150);
+        updateProgress('game'); // Track game completion
     } else {
         document.getElementById('status').textContent = `You got ${correctCount}/3 correct. Try again!`;
     }
@@ -1031,8 +1047,7 @@ function updateCalculator() {
     const n = parseInt(document.getElementById('n-value').value) || 0;
     const r = parseInt(document.getElementById('r-value').value) || 0;
     
-    // Track calculator usage
-    updateProgress('calculation');
+    // Calculator updated - no progress tracking yet
     
     const rGroup = document.getElementById('r-group');
     if (calcType === 'factorial' || calcType === 'subsets') {
@@ -1097,6 +1112,9 @@ function updateCalculator() {
     document.getElementById('calc-steps').innerHTML = steps.map(step => 
         `<div class="step">${step}</div>`
     ).join('');
+    
+    // Track calculation completion
+    updateProgress('calculation');
 }
 
 function factorial(n) {
@@ -1489,8 +1507,41 @@ function closeVisualization() {
 }
 
 function updateChart(type) {
+    if (!window.chart) return;
+    
     // Update chart type
-    console.log('Updating chart to:', type);
+    window.chart.config.type = type;
+    
+    // Adjust data and options for different chart types
+    if (type === 'pie' || type === 'doughnut') {
+        window.chart.config.data.datasets[0].data = [0.3, 0.4, 0.2, 0.1];
+        window.chart.config.data.labels = ['Success', 'Partial', 'Failure', 'Unknown'];
+        window.chart.config.options.plugins.legend.position = 'bottom';
+    } else if (type === 'scatter') {
+        window.chart.config.data.datasets[0].data = [
+            {x: 1, y: 2}, {x: 2, y: 3}, {x: 3, y: 1}, {x: 4, y: 4}, {x: 5, y: 2}
+        ];
+        window.chart.config.data.labels = undefined;
+        window.chart.config.options.scales = {
+            x: { type: 'linear', position: 'bottom' },
+            y: { type: 'linear' }
+        };
+    } else if (type === 'radar') {
+        window.chart.config.data.datasets[0].data = [0.8, 0.6, 0.9, 0.7, 0.5, 0.8];
+        window.chart.config.data.labels = ['Speed', 'Accuracy', 'Efficiency', 'Quality', 'Innovation', 'Reliability'];
+        window.chart.config.options.scales = {
+            r: { beginAtZero: true, max: 1 }
+        };
+    } else {
+        // Bar and Line charts
+        window.chart.config.data.datasets[0].data = [0.3, 0.4, 0.2, 0.1];
+        window.chart.config.data.labels = ['Category A', 'Category B', 'Category C', 'Category D'];
+        window.chart.config.options.scales = {
+            y: { beginAtZero: true, max: 1 }
+        };
+    }
+    
+    window.chart.update();
 }
 
 // Multiplayer Functions

@@ -432,6 +432,11 @@ body {
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    background: #2a2a2a !important;
+    color: #e8e8e8 !important;
+}
+
+.input-group select option {
     background: #2a2a2a;
     color: #e8e8e8;
 }
@@ -1123,17 +1128,20 @@ body {
 
 .room-code-section input {
     padding: 0.75rem;
-    border: 2px solid #e1e5e9;
+    border: 2px solid #333;
     border-radius: 8px;
     font-size: 1rem;
     text-transform: uppercase;
+    background: #2a2a2a !important;
+    color: #e8e8e8 !important;
 }
 
 .leaderboard {
-    background: #f8f9fa;
+    background: rgba(30, 30, 30, 0.8);
     border-radius: 12px;
     padding: 1.5rem;
     margin: 2rem 0;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .leaderboard-item {
@@ -1141,7 +1149,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #e1e5e9;
+    border-bottom: 1px solid #444;
+    color: #e0e0e0;
 }
 
 .leaderboard-item:last-child {
@@ -1150,7 +1159,7 @@ body {
 
 .rank {
     font-weight: bold;
-    color: #667eea;
+    color: #00b4d8;
     font-size: 1.2rem;
 }
 
@@ -1163,19 +1172,20 @@ body {
 
 .score {
     font-weight: bold;
-    color: #4ecdc4;
+    color: #dc2626;
 }
 
 .visualization-workspace {
-    background: white;
+    background: rgba(30, 30, 30, 0.95);
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     margin-top: 2rem;
     overflow: hidden;
+    border: 1px solid rgba(0, 180, 216, 0.2);
 }
 
 .viz-header {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    background: linear-gradient(135deg, #00b4d8, #0096c7);
     color: white;
     padding: 1.5rem 2rem;
     display: flex;
@@ -1185,6 +1195,7 @@ body {
 
 .viz-content {
     padding: 2rem;
+    color: #f0f0f0;
 }
 
 .viz-controls {
