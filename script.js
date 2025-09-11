@@ -51,12 +51,6 @@ const tourSteps = [
 
 // Navigation
 function showSection(sectionId) {
-    // Use mobile full-screen mode for problems and learning on mobile
-    if (isMobile() && (sectionId === 'problems' || sectionId === 'learn')) {
-        startMobileSection(sectionId);
-        return;
-    }
-    
     // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
@@ -539,6 +533,151 @@ function closeMobileSection() {
         container.remove();
     }
 }
+
+// Show problem in popup
+function showProblem(problemId) {
+    const problem = problems[problemId];
+    if (!problem) return;
+    
+    // Create popup container
+    const popup = document.createElement('div');
+    popup.className = 'popup-overlay';
+    popup.id = 'problem-popup';
+    
+    popup.innerHTML = `
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>${problem.title}</h3>
+                <button class="popup-close" onclick="closePopup('problem-popup')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="popup-body">
+                <div class="problem-scenario">
+                    <h4>Scenario:</h4>
+                    <p>${problem.scenario}</p>
+                </div>
+                <div class="problem-approach">
+                    <h4>Combinatorics Approach:</h4>
+                    <p>${problem.approach}</p>
+                </div>
+                <div class="problem-solution">
+                    <h4>Solution:</h4>
+                    <p>${problem.solution}</p>
+                </div>
+                <div class="problem-actions">
+                    <button class="btn btn-primary" onclick="solveProblem('${problemId}')">
+                        Mark as Solved
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+}
+
+// Show learning content in popup
+function showLearningContent(contentId) {
+    const content = learningContent[contentId];
+    if (!content) return;
+    
+    // Create popup container
+    const popup = document.createElement('div');
+    popup.className = 'popup-overlay';
+    popup.id = 'learning-popup';
+    
+    popup.innerHTML = `
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>${content.title}</h3>
+                <button class="popup-close" onclick="closePopup('learning-popup')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="popup-body">
+                <div class="learning-content">
+                    ${content.content}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+}
+
+// Close popup
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.remove();
+    }
+}
+
+// Learning content
+const learningContent = {
+    basics: {
+        title: "Combinatorics Fundamentals",
+        content: `
+            <h4>Basic Counting Principles</h4>
+            <p>Combinatorics is the branch of mathematics concerned with counting, arrangement, and selection of objects. The fundamental principle states that if one event can occur in m ways and a second event can occur in n ways, then the two events can occur in m × n ways.</p>
+            
+            <h4>Permutations</h4>
+            <p>A permutation is an arrangement of objects in a specific order. The number of permutations of n objects taken r at a time is P(n,r) = n!/(n-r)!</p>
+            
+            <h4>Combinations</h4>
+            <p>A combination is a selection of objects where order doesn't matter. The number of combinations of n objects taken r at a time is C(n,r) = n!/(r!(n-r)!)</p>
+            
+            <h4>Examples</h4>
+            <p>• How many ways can you arrange 5 books on a shelf? Answer: 5! = 120 ways</p>
+            <p>• How many ways can you choose 3 students from a class of 20? Answer: C(20,3) = 1,140 ways</p>
+        `
+    },
+    advanced: {
+        title: "Advanced Combinatorics Topics",
+        content: `
+            <h4>Generating Functions</h4>
+            <p>Generating functions are a powerful tool for solving combinatorial problems. They transform counting problems into algebraic problems.</p>
+            
+            <h4>Recurrence Relations</h4>
+            <p>Many combinatorial sequences satisfy recurrence relations, where each term is defined in terms of previous terms.</p>
+            
+            <h4>Graph Theory</h4>
+            <p>Graph theory studies relationships between objects. It's fundamental to network analysis, scheduling, and optimization problems.</p>
+            
+            <h4>Inclusion-Exclusion Principle</h4>
+            <p>This principle helps count objects that satisfy at least one of several properties by including and excluding overlapping cases.</p>
+        `
+    },
+    applications: {
+        title: "Real-World Applications",
+        content: `
+            <h4>Computer Science</h4>
+            <p>• Algorithm design and analysis</p>
+            <p>• Data structure optimization</p>
+            <p>• Cryptography and security</p>
+            <p>• Network routing and optimization</p>
+            
+            <h4>Biology</h4>
+            <p>• DNA sequence analysis</p>
+            <p>• Protein folding patterns</p>
+            <p>• Evolutionary tree construction</p>
+            <p>• Genetic algorithm design</p>
+            
+            <h4>Economics</h4>
+            <p>• Portfolio optimization</p>
+            <p>• Market analysis</p>
+            <p>• Game theory applications</p>
+            <p>• Risk assessment models</p>
+            
+            <h4>Operations Research</h4>
+            <p>• Supply chain optimization</p>
+            <p>• Scheduling and planning</p>
+            <p>• Resource allocation</p>
+            <p>• Transportation networks</p>
+        `
+    }
+};
 
 // Games
 const games = {
