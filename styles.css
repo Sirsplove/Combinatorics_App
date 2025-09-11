@@ -13,6 +13,25 @@ body {
     min-height: 100vh;
 }
 
+/* Force dark theme on all elements by default */
+body * {
+    color: inherit;
+}
+
+/* Ensure all divs and containers have dark backgrounds */
+div, section, article, main, aside {
+    background: transparent;
+    color: #e8e8e8;
+}
+
+/* Override any white or light backgrounds */
+[style*="background-color: white"], [style*="background: white"],
+[style*="background-color: #fff"], [style*="background: #fff"],
+[style*="background-color: #ffffff"], [style*="background: #ffffff"] {
+    background: rgba(30, 30, 30, 0.95) !important;
+    color: #e8e8e8 !important;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -964,6 +983,134 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
 /* Fix any remaining light backgrounds */
 .light, .bg-light, [style*="background: #f"], [style*="background-color: #f"] {
     background: #2a2a2a !important;
+    color: #e8e8e8 !important;
+}
+
+/* Problem Content Specific Styling */
+.problem-scenario {
+    background: rgba(30, 30, 30, 0.95) !important;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    color: #e8e8e8 !important;
+}
+
+.problem-scenario h4 {
+    color: #00b4d8 !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.problem-scenario p {
+    color: #e8e8e8 !important;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.problem-scenario ul {
+    color: #e8e8e8 !important;
+}
+
+.problem-scenario li {
+    color: #e8e8e8 !important;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+}
+
+.sectors-grid, .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.sector-item, .location-item {
+    background: rgba(0, 180, 216, 0.1) !important;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 180, 216, 0.3);
+    color: #e8e8e8 !important;
+}
+
+.sector-item strong, .location-item strong {
+    color: #00b4d8 !important;
+    font-size: 1.1rem;
+}
+
+.solution-steps {
+    background: rgba(30, 30, 30, 0.95) !important;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    color: #e8e8e8 !important;
+}
+
+.solution-steps h4 {
+    color: #00b4d8 !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.solution-steps p {
+    color: #e8e8e8 !important;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.step {
+    background: rgba(0, 180, 216, 0.1) !important;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    border-left: 4px solid #00b4d8;
+    color: #e8e8e8 !important;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.step-number {
+    background: #00b4d8 !important;
+    color: white !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.interactive-section {
+    background: rgba(30, 30, 30, 0.95) !important;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    text-align: center;
+    color: #e8e8e8 !important;
+}
+
+.interactive-section h4 {
+    color: #00b4d8 !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.problem-actions {
+    background: rgba(30, 30, 30, 0.95) !important;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    text-align: center;
     color: #e8e8e8 !important;
 }
 
