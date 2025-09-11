@@ -1153,6 +1153,297 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     color: #0a0a0a;
 }
 
+/* Mobile-First Responsive Design */
+@media (max-width: 768px) {
+    /* Header Mobile */
+    .header .container {
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .nav {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .header-actions {
+        gap: 0.25rem;
+    }
+    
+    .btn-help, .btn-tour, .btn-theme {
+        padding: 0.4rem;
+        font-size: 1rem;
+    }
+    
+    /* Hero Section Mobile */
+    .hero {
+        padding: 2rem 0;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    /* Cards Mobile */
+    .features, .problem-categories, .games-grid, .learning-modules {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .feature-card, .category-card, .game-card, .module-card {
+        padding: 1.5rem;
+        margin: 0.5rem;
+    }
+    
+    .feature-card h3, .category-card h3, .game-card h3, .module-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Workspaces Mobile */
+    .problem-workspace, .game-workspace, .calculator-workspace {
+        margin: 0.5rem;
+        border-radius: 12px;
+    }
+    
+    .problem-header, .game-header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .problem-content, .game-content {
+        padding: 1rem;
+    }
+    
+    /* Calculator Mobile */
+    .calc-inputs {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .input-group select, .input-group input {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Buttons Mobile */
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Modals Mobile */
+    .modal-content {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+        overflow-y: auto;
+        width: calc(100vw - 2rem);
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    /* Footer Mobile */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    /* Game-specific Mobile */
+    .game-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    /* Problem content mobile */
+    .problem-scenario, .solution-steps, .interactive-section, .problem-actions {
+        margin: 0.5rem 0;
+        padding: 1rem;
+    }
+    
+    .sectors-grid, .locations-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .sector-item, .location-item {
+        padding: 0.75rem;
+    }
+    
+    /* Visualization Mobile */
+    .visualization-workspace {
+        margin: 0.5rem;
+    }
+    
+    .viz-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .viz-controls button {
+        width: 100%;
+    }
+    
+    /* Mobile Game Styles */
+    .sudoku-grid {
+        max-width: 90vw;
+        margin: 1rem auto;
+        padding: 5px;
+    }
+    
+    .sudoku-cell {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    
+    .pascal-triangle {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .pascal-cell {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    
+    .sequence-numbers {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .seq-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .prediction-inputs {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .prediction-inputs input {
+        width: 50px;
+        height: 35px;
+    }
+    
+    /* Mobile Full-Screen Game Mode */
+    .game-fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+        z-index: 9999;
+        overflow-y: auto;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .game-fullscreen .game-header {
+        position: sticky;
+        top: 0;
+        z-index: 10000;
+        margin-bottom: 1rem;
+    }
+    
+    .game-fullscreen .game-content {
+        padding: 0;
+        min-height: auto;
+    }
+    
+    .game-fullscreen .btn {
+        width: auto;
+        max-width: none;
+    }
+    
+    /* Mobile Navigation */
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(20, 20, 20, 0.95);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(0, 180, 216, 0.2);
+        padding: 0.5rem;
+        z-index: 1000;
+    }
+    
+    .mobile-nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+        color: #e8e8e8;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: color 0.3s ease;
+    }
+    
+    .mobile-nav-item.active {
+        color: #00b4d8;
+    }
+    
+    .mobile-nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    /* Show mobile nav on mobile */
+    @media (max-width: 768px) {
+        .mobile-nav {
+            display: block;
+        }
+        
+        .main {
+            margin-bottom: 80px; /* Space for mobile nav */
+        }
+        
+        .footer {
+            margin-bottom: 80px; /* Space for mobile nav */
+        }
+    }
+}
+
 /* Advanced Game Styles */
 .sudoku-grid {
     display: grid;

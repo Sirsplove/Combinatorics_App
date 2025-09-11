@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Combinatorics App - Real World Problems & Games</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -556,6 +556,32 @@
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="#" class="mobile-nav-item" onclick="showSection('home')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('problems')">
+                <i class="fas fa-puzzle-piece"></i>
+                <span>Problems</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('games')">
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('calculator')">
+                <i class="fas fa-calculator"></i>
+                <span>Calculator</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('learn')">
+                <i class="fas fa-book"></i>
+                <span>Learn</span>
+            </a>
+        </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>

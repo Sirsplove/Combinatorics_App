@@ -59,11 +59,30 @@ function showSection(sectionId) {
     // Show selected section
     document.getElementById(sectionId).classList.add('active');
     
-    // Update navigation
+    // Update desktop navigation
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
     document.querySelector(`[href="#${sectionId}"]`).classList.add('active');
+    
+    // Update mobile navigation
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Map section IDs to mobile nav items
+    const sectionMap = {
+        'home': 0,
+        'problems': 1,
+        'games': 2,
+        'calculator': 3,
+        'learn': 4
+    };
+    
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+    if (mobileNavItems[sectionMap[sectionId]]) {
+        mobileNavItems[sectionMap[sectionId]].classList.add('active');
+    }
 }
 
 // Real-world Problems
@@ -379,6 +398,63 @@ function solveProblem() {
     updateProgress('problem');
     showAchievement('Problem Solver', 'Great job solving this real-world problem!');
     document.getElementById('problem-workspace').style.display = 'none';
+}
+
+// Mobile detection
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// Mobile game fullscreen mode
+function startMobileGame(gameType) {
+    if (!isMobile()) {
+        startGame(gameType);
+        return;
+    }
+    
+    const game = games[gameType];
+    if (!game) return;
+    
+    // Create fullscreen game container
+    const fullscreenContainer = document.createElement('div');
+    fullscreenContainer.className = 'game-fullscreen';
+    fullscreenContainer.id = 'mobile-game-container';
+    
+    fullscreenContainer.innerHTML = `
+        <div class="game-header">
+            <h3>${game.title}</h3>
+            <button class="btn btn-outline" onclick="closeMobileGame()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="game-content" id="mobile-game-content"></div>
+    `;
+    
+    document.body.appendChild(fullscreenContainer);
+    
+    // Start the game in mobile content area
+    const mobileGameContent = document.getElementById('mobile-game-content');
+    const originalGameContent = document.getElementById('game-content');
+    
+    // Temporarily replace game content
+    const tempContent = originalGameContent.innerHTML;
+    originalGameContent.innerHTML = '';
+    originalGameContent.appendChild(mobileGameContent);
+    
+    // Start the game
+    game.start();
+    
+    // Move content back to mobile container
+    const gameHTML = originalGameContent.innerHTML;
+    mobileGameContent.innerHTML = gameHTML;
+    originalGameContent.innerHTML = tempContent;
+}
+
+function closeMobileGame() {
+    const container = document.getElementById('mobile-game-container');
+    if (container) {
+        container.remove();
+    }
 }
 
 // Games
@@ -757,6 +833,12 @@ const games = {
 };
 
 function startGame(gameType) {
+    // Use mobile game mode if on mobile
+    if (isMobile()) {
+        startMobileGame(gameType);
+        return;
+    }
+    
     const game = games[gameType];
     const workspace = document.getElementById('game-workspace');
     const title = document.getElementById('game-title');
