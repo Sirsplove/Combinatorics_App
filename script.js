@@ -11,11 +11,6 @@ let userProgress = {
     gamesCompleted: 0,
     calculationsDone: 0,
     totalScore: 0,
-    achievements: {
-        firstProblem: false,
-        gameMaster: false,
-        calculatorPro: false
-    },
     hasSeenWelcome: false
 };
 
@@ -278,7 +273,6 @@ const problems = {
 function solveProblem() {
     // Mark problem as solved
     updateProgress('problem');
-    showAchievement('Problem Solver', 'Great job solving this real-world problem!');
     document.getElementById('problem-workspace').style.display = 'none';
 }
 
@@ -981,7 +975,6 @@ function checkPermutationSolution() {
         document.getElementById('status').textContent = 'Congratulations! You solved it!';
         gameScore += Math.max(0, 100 - window.moves * 5);
         updateGameStats();
-        updateProgress('score', gameScore);
     }
 }
 
@@ -1039,8 +1032,6 @@ function checkCombination() {
         document.getElementById('status').textContent = 'Excellent! You solved the combination challenge!';
         gameScore += 100;
         updateGameStats();
-        updateProgress('score', 100);
-        updateProgress('game'); // Track game completion
     } else if (selectedCount !== 3) {
         document.getElementById('status').textContent = 'Please select exactly 3 items';
     } else {
@@ -1074,8 +1065,6 @@ function checkPredictions() {
         document.getElementById('status').textContent = 'Perfect! All predictions are correct!';
         gameScore += 150;
         updateGameStats();
-        updateProgress('score', 150);
-        updateProgress('game'); // Track game completion
     } else {
         document.getElementById('status').textContent = `You got ${correctCount}/3 correct. Try again!`;
     }
@@ -1164,11 +1153,9 @@ function checkPath() {
         if (window.totalDistance <= optimalDistance) {
             document.getElementById('status').textContent = 'Excellent! You found an optimal path!';
             gameScore += 200;
-            updateProgress('score', 200);
         } else {
             document.getElementById('status').textContent = `Good path! Optimal distance is ${optimalDistance}`;
             gameScore += 100;
-            updateProgress('score', 100);
         }
         updateGameStats();
     } else {
@@ -1255,7 +1242,6 @@ function updateCalculator() {
     ).join('');
     
     // Track calculation completion
-    updateProgress('calculation');
 }
 
 function factorial(n) {
@@ -1398,25 +1384,6 @@ function updateProgressDisplay() {
     document.getElementById('games-completed').textContent = userProgress.gamesCompleted;
     document.getElementById('calculations-done').textContent = userProgress.calculationsDone;
     document.getElementById('total-score').textContent = userProgress.totalScore;
-    
-    // Update achievements
-    const achievements = document.querySelectorAll('.achievement');
-    if (achievements.length >= 3) {
-        achievements[0].classList.toggle('locked', !userProgress.achievements.firstProblem);
-        achievements[1].classList.toggle('locked', !userProgress.achievements.gameMaster);
-        achievements[2].classList.toggle('locked', !userProgress.achievements.calculatorPro);
-        
-        // Update icons for unlocked achievements
-        if (userProgress.achievements.firstProblem) {
-            achievements[0].querySelector('i').className = 'fas fa-check-circle';
-        }
-        if (userProgress.achievements.gameMaster) {
-            achievements[1].querySelector('i').className = 'fas fa-gamepad';
-        }
-        if (userProgress.achievements.calculatorPro) {
-            achievements[2].querySelector('i').className = 'fas fa-calculator';
-        }
-    }
 }
 
 // Tour Functions
@@ -1474,24 +1441,12 @@ function updateProgress(type, increment = 1) {
     switch (type) {
         case 'problem':
             userProgress.problemsSolved += increment;
-            if (userProgress.problemsSolved === 1) {
-                userProgress.achievements.firstProblem = true;
-                showAchievement('First Problem', 'You solved your first real-world problem!');
-            }
             break;
         case 'game':
             userProgress.gamesCompleted += increment;
-            if (userProgress.gamesCompleted >= 4) {
-                userProgress.achievements.gameMaster = true;
-                showAchievement('Game Master', 'You completed all games!');
-            }
             break;
         case 'calculation':
             userProgress.calculationsDone += increment;
-            if (userProgress.calculationsDone >= 10) {
-                userProgress.achievements.calculatorPro = true;
-                showAchievement('Calculator Pro', 'You used the calculator 10 times!');
-            }
             break;
         case 'score':
             userProgress.totalScore += increment;
@@ -1500,48 +1455,7 @@ function updateProgress(type, increment = 1) {
     saveProgress();
 }
 
-function showAchievement(title, description) {
-    // Create a temporary achievement notification
-    const notification = document.createElement('div');
-    notification.className = 'achievement-notification';
-    notification.innerHTML = `
-        <div class="achievement-content">
-            <i class="fas fa-trophy"></i>
-            <div>
-                <strong>${title}</strong>
-                <p>${description}</p>
-            </div>
-        </div>
-    `;
-    
-    // Add styles with Audi-inspired colors
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: linear-gradient(135deg, #dc2626, #b91c1c);
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4);
-        z-index: 4000;
-        animation: slideIn 0.5s ease-out;
-        max-width: 300px;
-        border: 1px solid rgba(0, 180, 216, 0.3);
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.5s ease-in';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 500);
-    }, 5000);
-}
+// Achievement system removed
 
 // Theme Management
 function initializeTheme() {
