@@ -134,6 +134,99 @@ const problems = {
         interactive: true
     },
     
+    genetics: {
+        title: "DNA Sequence Analysis",
+        scenario: "A geneticist is analyzing DNA sequences to understand genetic diversity. They need to count different arrangements of nucleotide bases and calculate probabilities of genetic combinations.",
+        problem: "Analyze the following DNA sequence and answer the combinatorial questions:",
+        sequence: "ATCGATCGATCGATCG",
+        questions: [
+            "How many different 4-base sequences can be formed from this DNA?",
+            "What's the probability of finding the sequence 'ATCG' in a random arrangement?",
+            "How many ways can the bases be arranged if A and T must be adjacent?",
+            "Calculate the number of possible genetic codes with these constraints"
+        ],
+        solution: "This involves permutations with repetition, conditional probability, and constrained arrangements.",
+        steps: [
+            "Count total bases: 16 bases (4 A, 4 T, 4 C, 4 G)",
+            "Calculate 4-base sequences: 4^4 = 256 possibilities",
+            "Find 'ATCG' probability: 1/256 ≈ 0.0039",
+            "Calculate adjacent A-T arrangements using constrained permutations"
+        ],
+        interactive: true
+    },
+    
+    cryptography: {
+        title: "Password Security Analysis",
+        scenario: "A cybersecurity expert needs to assess the strength of different password policies and encryption methods using combinatorial analysis.",
+        problem: "Evaluate the security of these password systems:",
+        policies: [
+            "8 characters, letters and numbers only",
+            "12 characters, must include uppercase, lowercase, numbers, symbols",
+            "Variable length, no repeated characters",
+            "Biometric + PIN combination system"
+        ],
+        solution: "Use combinatorial counting to determine the number of possible passwords and assess security strength.",
+        steps: [
+            "Policy 1: 36^8 = 2.8 trillion possibilities",
+            "Policy 2: 94^12 = 4.7 × 10^23 possibilities", 
+            "Policy 3: Use permutations without repetition",
+            "Policy 4: Combine biometric probability with PIN combinations"
+        ],
+        interactive: true
+    },
+    
+    network: {
+        title: "Social Network Analysis",
+        scenario: "A social media platform wants to analyze connection patterns and predict viral content spread using graph theory and combinatorics.",
+        problem: "Analyze the network structure and answer these questions:",
+        network_data: {
+            nodes: 1000,
+            edges: 5000,
+            clusters: 15,
+            avg_degree: 10
+        },
+        questions: [
+            "How many possible paths exist between any two users?",
+            "What's the probability of information spreading to 50% of users?",
+            "Calculate the number of triangles (mutual connections) in the network",
+            "Determine the most influential user using centrality measures"
+        ],
+        solution: "Apply graph theory, network analysis, and combinatorial optimization techniques.",
+        steps: [
+            "Use adjacency matrix to count paths",
+            "Apply epidemic models for spread probability",
+            "Count triangles using matrix multiplication",
+            "Calculate betweenness and eigenvector centrality"
+        ],
+        interactive: true
+    },
+    
+    finance: {
+        title: "Portfolio Optimization",
+        scenario: "A financial analyst needs to optimize an investment portfolio using combinatorial methods to maximize returns while minimizing risk.",
+        problem: "Design an optimal portfolio with these constraints:",
+        assets: [
+            { name: "Stocks", return: 0.12, risk: 0.25, weight_limit: 0.6 },
+            { name: "Bonds", return: 0.06, risk: 0.10, weight_limit: 0.4 },
+            { name: "Commodities", return: 0.08, risk: 0.20, weight_limit: 0.3 },
+            { name: "Real Estate", return: 0.10, risk: 0.15, weight_limit: 0.2 }
+        ],
+        constraints: [
+            "Total weight must equal 1.0",
+            "No single asset can exceed its weight limit",
+            "Risk tolerance: maximum 0.18 portfolio risk",
+            "Minimum expected return: 8%"
+        ],
+        solution: "Use combinatorial optimization to find the best asset allocation.",
+        steps: [
+            "Generate all valid weight combinations",
+            "Calculate expected return and risk for each combination",
+            "Filter combinations meeting constraints",
+            "Select combination with highest return-to-risk ratio"
+        ],
+        interactive: true
+    },
+    
     probability: {
         title: "Risk Assessment for Investment Portfolio",
         scenario: "An investor wants to diversify their portfolio across 5 different sectors. They need to assess the probability of different outcomes based on historical data.",
@@ -428,6 +521,173 @@ const games = {
                 <div class="game-controls">
                     <button class="btn btn-primary" onclick="checkPredictions()">Check Predictions</button>
                     <button class="btn btn-secondary" onclick="showCorrectAnswers()">Show Answers</button>
+                </div>
+            `;
+        }
+    },
+    
+    'sudoku-solver': {
+        title: "Sudoku Solver",
+        description: "Use combinatorial logic to solve Sudoku puzzles!",
+        start: function() {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = `
+                <div class="game-instructions">
+                    <h4>Goal: Solve the Sudoku puzzle using combinatorial logic</h4>
+                    <p>Click on empty cells to fill them. Use the elimination method and logical deduction!</p>
+                </div>
+                
+                <div class="sudoku-grid">
+                    ${generateSudokuGrid()}
+                </div>
+                
+                <div class="game-stats">
+                    <p>Hints Used: <span id="hints-used">0</span></p>
+                    <p>Time: <span id="sudoku-time">00:00</span></p>
+                    <p>Status: <span id="status">Start solving!</span></p>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="btn btn-primary" onclick="checkSudokuSolution()">Check Solution</button>
+                    <button class="btn btn-secondary" onclick="getHint()">Get Hint</button>
+                    <button class="btn btn-outline" onclick="resetSudoku()">Reset</button>
+                </div>
+            `;
+            
+            startSudokuTimer();
+        }
+    },
+    
+    'binomial-builder': {
+        title: "Binomial Builder",
+        description: "Build and explore Pascal's triangle and binomial expansions!",
+        start: function() {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = `
+                <div class="game-instructions">
+                    <h4>Goal: Build Pascal's triangle and explore binomial expansions</h4>
+                    <p>Click on cells to expand them and see the binomial coefficients!</p>
+                </div>
+                
+                <div class="pascal-triangle">
+                    ${generatePascalTriangle(8)}
+                </div>
+                
+                <div class="binomial-expansion">
+                    <h4>Binomial Expansion:</h4>
+                    <div class="expansion-input">
+                        <input type="number" id="binomial-n" min="0" max="10" value="3" onchange="updateBinomialExpansion()">
+                        <span>(x + y)^<span id="binomial-power">3</span></span>
+                    </div>
+                    <div id="expansion-result" class="expansion-result"></div>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="btn btn-primary" onclick="updateBinomialExpansion()">Update Expansion</button>
+                    <button class="btn btn-secondary" onclick="animateTriangle()">Animate Triangle</button>
+                </div>
+            `;
+            
+            updateBinomialExpansion();
+        }
+    },
+    
+    'sequence-predictor': {
+        title: "Sequence Predictor",
+        description: "Find patterns in number sequences using combinatorial analysis!",
+        start: function() {
+            const sequences = [
+                { seq: [1, 1, 2, 3, 5, 8], type: "Fibonacci" },
+                { seq: [1, 3, 6, 10, 15, 21], type: "Triangular" },
+                { seq: [2, 4, 8, 16, 32, 64], type: "Powers of 2" },
+                { seq: [1, 4, 9, 16, 25, 36], type: "Perfect Squares" }
+            ];
+            
+            const currentSeq = sequences[Math.floor(Math.random() * sequences.length)];
+            
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = `
+                <div class="game-instructions">
+                    <h4>Goal: Predict the next numbers in the sequence</h4>
+                    <p>Analyze the pattern and enter your predictions!</p>
+                </div>
+                
+                <div class="sequence-display">
+                    <h4>Sequence:</h4>
+                    <div class="sequence-numbers">
+                        ${currentSeq.seq.map((num, index) => 
+                            `<span class="seq-number">${num}</span>`
+                        ).join('')}
+                        <span class="seq-number unknown">?</span>
+                        <span class="seq-number unknown">?</span>
+                        <span class="seq-number unknown">?</span>
+                    </div>
+                </div>
+                
+                <div class="prediction-inputs">
+                    <label>Next number:</label>
+                    <input type="number" id="pred-1" placeholder="?">
+                    <label>Following number:</label>
+                    <input type="number" id="pred-2" placeholder="?">
+                    <label>Third number:</label>
+                    <input type="number" id="pred-3" placeholder="?">
+                </div>
+                
+                <div class="game-stats">
+                    <p>Attempts: <span id="attempts">0</span></p>
+                    <p>Status: <span id="status">Make your predictions</span></p>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="btn btn-primary" onclick="checkSequencePredictions()">Check Predictions</button>
+                    <button class="btn btn-secondary" onclick="getSequenceHint()">Get Hint</button>
+                </div>
+            `;
+            
+            window.currentSequence = currentSeq;
+        }
+    },
+    
+    'multiplayer-challenge': {
+        title: "Multiplayer Challenge",
+        description: "Compete with friends in real-time combinatorics challenges!",
+        start: function() {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = `
+                <div class="game-instructions">
+                    <h4>Goal: Compete in real-time combinatorics challenges</h4>
+                    <p>Join a room or create your own to challenge friends!</p>
+                </div>
+                
+                <div class="multiplayer-lobby">
+                    <div class="room-actions">
+                        <button class="btn btn-primary" onclick="createMultiplayerRoom()">
+                            <i class="fas fa-plus"></i> Create Room
+                        </button>
+                        <button class="btn btn-secondary" onclick="joinMultiplayerRoom()">
+                            <i class="fas fa-sign-in-alt"></i> Join Room
+                        </button>
+                    </div>
+                    
+                    <div class="room-code-section" style="display: none;">
+                        <input type="text" id="multiplayer-room-code" placeholder="Enter room code">
+                        <button class="btn btn-primary" onclick="connectToMultiplayerRoom()">Connect</button>
+                    </div>
+                </div>
+                
+                <div class="challenge-area" style="display: none;">
+                    <h4>Current Challenge:</h4>
+                    <div id="challenge-content" class="challenge-content"></div>
+                    <div class="players-list">
+                        <h5>Players:</h5>
+                        <div id="players-list"></div>
+                    </div>
+                </div>
+                
+                <div class="game-stats">
+                    <p>Room Code: <span id="room-code-display">-</span></p>
+                    <p>Players: <span id="player-count">1</span></p>
+                    <p>Status: <span id="status">Waiting for players...</span></p>
                 </div>
             `;
         }
@@ -1123,6 +1383,196 @@ function showAchievement(title, description) {
     }, 5000);
 }
 
+// Theme Management
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+function setTheme(theme) {
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+    
+    if (theme === 'dark') {
+        body.classList.add('dark-theme');
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        body.classList.remove('dark-theme');
+        themeIcon.className = 'fas fa-moon';
+    }
+}
+
+// Export Functions
+function exportSolution() {
+    const calcType = document.getElementById('calc-type').value;
+    const n = document.getElementById('n-value').value;
+    const r = document.getElementById('r-value').value;
+    const result = document.getElementById('calc-answer').textContent;
+    const steps = document.getElementById('calc-steps').innerHTML;
+    
+    const exportData = {
+        type: calcType,
+        parameters: { n, r },
+        result: result,
+        steps: steps,
+        timestamp: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    const url = URL.createObjectURL(dataBlob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `combinatorics-solution-${Date.now()}.json`;
+    link.click();
+    
+    URL.revokeObjectURL(url);
+}
+
+// Data Visualization
+function visualizeResult() {
+    const workspace = document.getElementById('visualization-workspace');
+    workspace.style.display = 'block';
+    
+    const ctx = document.getElementById('probabilityChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Permutations', 'Combinations', 'Factorials', 'Subsets'],
+            datasets: [{
+                label: 'Calculations',
+                data: [userProgress.calculationsDone, userProgress.gamesCompleted, userProgress.problemsSolved, userProgress.totalScore],
+                backgroundColor: [
+                    'rgba(102, 126, 234, 0.8)',
+                    'rgba(78, 205, 196, 0.8)',
+                    'rgba(255, 107, 107, 0.8)',
+                    'rgba(255, 193, 7, 0.8)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Your Combinatorics Progress'
+                }
+            }
+        }
+    });
+}
+
+function closeVisualization() {
+    document.getElementById('visualization-workspace').style.display = 'none';
+}
+
+function updateChart(type) {
+    // Update chart type
+    console.log('Updating chart to:', type);
+}
+
+// Multiplayer Functions
+function createRoom() {
+    const roomCode = generateRoomCode();
+    document.getElementById('room-code').value = roomCode;
+    document.querySelector('.room-code-input').style.display = 'block';
+    document.getElementById('status').textContent = `Room created! Code: ${roomCode}`;
+}
+
+function joinRoom() {
+    document.querySelector('.room-code-input').style.display = 'block';
+    document.getElementById('status').textContent = 'Enter room code to join';
+}
+
+function connectToRoom() {
+    const roomCode = document.getElementById('room-code').value;
+    if (roomCode) {
+        document.getElementById('status').textContent = `Connecting to room ${roomCode}...`;
+        // Simulate connection
+        setTimeout(() => {
+            document.getElementById('status').textContent = `Connected to room ${roomCode}!`;
+        }, 1000);
+    }
+}
+
+function generateRoomCode() {
+    return Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
+// Advanced Game Functions
+function generateSudokuGrid() {
+    // Generate a simple Sudoku grid
+    const grid = Array(9).fill().map(() => Array(9).fill(0));
+    // Add some pre-filled numbers
+    const preFilled = [
+        [5, 3, 0, 0, 7, 0, 0, 0, 0],
+        [6, 0, 0, 1, 9, 5, 0, 0, 0],
+        [0, 9, 8, 0, 0, 0, 0, 6, 0],
+        [8, 0, 0, 0, 6, 0, 0, 0, 3],
+        [4, 0, 0, 8, 0, 3, 0, 0, 1],
+        [7, 0, 0, 0, 2, 0, 0, 0, 6],
+        [0, 6, 0, 0, 0, 0, 2, 8, 0],
+        [0, 0, 0, 4, 1, 9, 0, 0, 5],
+        [0, 0, 0, 0, 8, 0, 0, 7, 9]
+    ];
+    
+    return preFilled.map((row, i) => 
+        `<div class="sudoku-row">${row.map((cell, j) => 
+            `<input type="number" class="sudoku-cell" min="1" max="9" value="${cell || ''}" ${cell ? 'readonly' : ''}>`
+        ).join('')}</div>`
+    ).join('');
+}
+
+function generatePascalTriangle(rows) {
+    let triangle = '';
+    for (let i = 0; i < rows; i++) {
+        triangle += '<div class="pascal-row">';
+        for (let j = 0; j <= i; j++) {
+            const value = binomialCoefficient(i, j);
+            triangle += `<span class="pascal-cell" onclick="explainCoefficient(${i}, ${j})">${value}</span>`;
+        }
+        triangle += '</div>';
+    }
+    return triangle;
+}
+
+function binomialCoefficient(n, k) {
+    if (k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    let result = 1;
+    for (let i = 0; i < k; i++) {
+        result = result * (n - i) / (i + 1);
+    }
+    return Math.round(result);
+}
+
+function updateBinomialExpansion() {
+    const n = parseInt(document.getElementById('binomial-n').value) || 0;
+    document.getElementById('binomial-power').textContent = n;
+    
+    let expansion = '';
+    for (let k = 0; k <= n; k++) {
+        const coeff = binomialCoefficient(n, k);
+        const xPower = n - k;
+        const yPower = k;
+        
+        if (k > 0) expansion += ' + ';
+        if (coeff !== 1) expansion += coeff;
+        if (xPower > 0) expansion += `x${xPower > 1 ? `^${xPower}` : ''}`;
+        if (yPower > 0) expansion += `y${yPower > 1 ? `^${yPower}` : ''}`;
+    }
+    
+    document.getElementById('expansion-result').textContent = expansion;
+}
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     // Load user progress
@@ -1142,6 +1592,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize calculator
     updateCalculator();
+    
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => console.log('SW registered'))
+            .catch(error => console.log('SW registration failed'));
+    }
+    
+    // Initialize theme
+    initializeTheme();
     
     // Add some CSS for game elements
     const style = document.createElement('style');

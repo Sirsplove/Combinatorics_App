@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Combinatorics App">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM4MS42NDA2IDQ4IDcwIDU5LjY0MDYgNzAgNzRWNzRDNzAgODguMzU5NCA4MS42NDA2IDEwMCA5NiAxMDBDMTEwLjM1OSAxMDAgMTIyIDg4LjM1OTQgMTIyIDc0Vjc0QzEyMiA1OS42NDA2IDExMC4zNTkgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDggMTIyQzMzLjY0MDYgMTIyIDIyIDEzMy42NDEgMjIgMTQ4VjE0OEMyMiAxNjIuMzU5IDMzLjY0MDYgMTc0IDQ4IDE3NEM2Mi4zNTk0IDE3NCA3NCAxNjIuMzU5IDc0IDE0OFYxNDhDNzQgMTMzLjY0MSA2Mi4zNTk0IDEyMiA0OCAxMjJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTQ0IDEyMkMxMjkuNjQxIDEyMiAxMTggMTMzLjY0MSAxMTggMTQ4VjE0OEMxMTggMTYyLjM1OSAxMjkuNjQxIDE3NCAxNDQgMTc0QzE1OC4zNTkgMTc0IDE3MCAxNjIuMzU5IDE3MCAxNDhWMTQ4QzE3MCAxMzMuNjQxIDE1OC4zNTkgMTIyIDE0NCAxMjJaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header class="header">
@@ -21,8 +32,12 @@
                 <a href="#games" class="nav-link" data-tooltip="Play interactive games">Games</a>
                 <a href="#calculator" class="nav-link" data-tooltip="Calculate permutations & combinations">Calculator</a>
                 <a href="#learn" class="nav-link" data-tooltip="Learn the fundamentals">Learn</a>
+                <a href="#multiplayer" class="nav-link" data-tooltip="Compete with friends">Multiplayer</a>
             </nav>
             <div class="header-actions">
+                <button class="btn-theme" onclick="toggleTheme()" title="Toggle Theme">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
                 <button class="btn-help" onclick="showHelp()" title="Get Help">
                     <i class="fas fa-question-circle"></i>
                 </button>
@@ -159,6 +174,26 @@
                         <h3>Probability & Risk</h3>
                         <p>Calculate probabilities and assess risks in decision making</p>
                     </div>
+                    <div class="category-card" onclick="loadProblem('genetics')">
+                        <i class="fas fa-dna"></i>
+                        <h3>Genetics & Biology</h3>
+                        <p>Analyze DNA sequences, genetic combinations, and evolutionary patterns</p>
+                    </div>
+                    <div class="category-card" onclick="loadProblem('cryptography')">
+                        <i class="fas fa-lock"></i>
+                        <h3>Cryptography</h3>
+                        <p>Break codes, analyze encryption strength, and secure communications</p>
+                    </div>
+                    <div class="category-card" onclick="loadProblem('network')">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Network Analysis</h3>
+                        <p>Analyze social networks, internet routing, and connection patterns</p>
+                    </div>
+                    <div class="category-card" onclick="loadProblem('finance')">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Financial Modeling</h3>
+                        <p>Portfolio optimization, risk assessment, and market analysis</p>
+                    </div>
                 </div>
                 
                 <div id="problem-workspace" class="problem-workspace" style="display: none;">
@@ -202,6 +237,30 @@
                         <p>Navigate networks and find optimal paths</p>
                         <div class="difficulty">Hard</div>
                     </div>
+                    <div class="game-card" onclick="startGame('sudoku-solver')">
+                        <i class="fas fa-th"></i>
+                        <h3>Sudoku Solver</h3>
+                        <p>Use combinatorial logic to solve Sudoku puzzles</p>
+                        <div class="difficulty">Hard</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('binomial-builder')">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Binomial Builder</h3>
+                        <p>Build and explore Pascal's triangle and binomial expansions</p>
+                        <div class="difficulty">Medium</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('sequence-predictor')">
+                        <i class="fas fa-sort-numeric-up"></i>
+                        <h3>Sequence Predictor</h3>
+                        <p>Find patterns in number sequences using combinatorial analysis</p>
+                        <div class="difficulty">Hard</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('multiplayer-challenge')">
+                        <i class="fas fa-users"></i>
+                        <h3>Multiplayer Challenge</h3>
+                        <p>Compete with friends in real-time combinatorics challenges</p>
+                        <div class="difficulty">Any</div>
+                    </div>
                 </div>
                 
                 <div id="game-workspace" class="game-workspace" style="display: none;">
@@ -233,6 +292,9 @@
                                 <option value="combination">Combination (nCr)</option>
                                 <option value="factorial">Factorial (n!)</option>
                                 <option value="subsets">Number of Subsets</option>
+                                <option value="binomial">Binomial Coefficient</option>
+                                <option value="multinomial">Multinomial Coefficient</option>
+                                <option value="stirling">Stirling Numbers</option>
                             </select>
                         </div>
                         <div class="input-group">
@@ -243,6 +305,10 @@
                             <label for="r-value">r (selected items):</label>
                             <input type="number" id="r-value" min="0" max="100" value="3" onchange="updateCalculator()">
                         </div>
+                        <div class="input-group" id="k-group" style="display: none;">
+                            <label for="k-value">k (third parameter):</label>
+                            <input type="number" id="k-value" min="0" max="100" value="2" onchange="updateCalculator()">
+                        </div>
                     </div>
                     <div class="calc-result">
                         <h3>Result:</h3>
@@ -250,6 +316,32 @@
                         <div id="calc-explanation" class="explanation">
                             <h4>Step-by-step solution:</h4>
                             <div id="calc-steps"></div>
+                        </div>
+                        <div class="calc-actions">
+                            <button class="btn btn-primary" onclick="exportSolution()">
+                                <i class="fas fa-download"></i> Export Solution
+                            </button>
+                            <button class="btn btn-secondary" onclick="visualizeResult()">
+                                <i class="fas fa-chart-bar"></i> Visualize
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Visualization Section -->
+                <div class="visualization-workspace" id="visualization-workspace" style="display: none;">
+                    <div class="viz-header">
+                        <h3>Data Visualization</h3>
+                        <button class="btn btn-outline" onclick="closeVisualization()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    <div class="viz-content">
+                        <canvas id="probabilityChart" width="400" height="200"></canvas>
+                        <div class="viz-controls">
+                            <button class="btn btn-small" onclick="updateChart('bar')">Bar Chart</button>
+                            <button class="btn btn-small" onclick="updateChart('line')">Line Chart</button>
+                            <button class="btn btn-small" onclick="updateChart('pie')">Pie Chart</button>
                         </div>
                     </div>
                 </div>
@@ -286,6 +378,51 @@
                         </button>
                     </div>
                     <div id="module-text" class="module-text"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Multiplayer Section -->
+        <section id="multiplayer" class="section">
+            <div class="container">
+                <h2>Multiplayer Challenges</h2>
+                <div class="multiplayer-workspace">
+                    <div class="lobby-section">
+                        <h3>Join or Create a Challenge</h3>
+                        <div class="lobby-actions">
+                            <button class="btn btn-primary" onclick="createRoom()">
+                                <i class="fas fa-plus"></i> Create Room
+                            </button>
+                            <button class="btn btn-secondary" onclick="joinRoom()">
+                                <i class="fas fa-sign-in-alt"></i> Join Room
+                            </button>
+                        </div>
+                        <div class="room-code-input" style="display: none;">
+                            <input type="text" id="room-code" placeholder="Enter room code">
+                            <button class="btn btn-primary" onclick="connectToRoom()">Connect</button>
+                        </div>
+                    </div>
+                    
+                    <div class="leaderboard-section">
+                        <h3>Global Leaderboard</h3>
+                        <div class="leaderboard">
+                            <div class="leaderboard-item">
+                                <span class="rank">1</span>
+                                <span class="name">MathMaster</span>
+                                <span class="score">2,450</span>
+                            </div>
+                            <div class="leaderboard-item">
+                                <span class="rank">2</span>
+                                <span class="name">ComboKing</span>
+                                <span class="score">2,100</span>
+                            </div>
+                            <div class="leaderboard-item">
+                                <span class="rank">3</span>
+                                <span class="name">PermutationPro</span>
+                                <span class="score">1,850</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

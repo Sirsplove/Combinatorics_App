@@ -1,4 +1,4 @@
-# Combinatorics App 🧮
+# Combinatorics App 
 
 A comprehensive web application that teaches combinatorics through real-world problem solving and engaging interactive games. Master combinatorial thinking while solving practical problems and playing fun puzzles!
 
