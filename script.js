@@ -2035,20 +2035,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const overlay = document.getElementById('mobile-nav-overlay');
         const hamburgerBtn = document.getElementById('hamburger-btn');
         
-        if (!mobileNav || !overlay) return;
+        if (!mobileNav || !overlay) {
+            console.log('Mobile nav elements not found');
+            return;
+        }
         
         const isOpen = mobileNav.classList.contains('open');
+        console.log('Mobile nav is open:', isOpen);
         
         if (isOpen) {
             // Close the menu
             mobileNav.classList.remove('open');
             overlay.classList.remove('show');
-            hamburgerBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            if (hamburgerBtn) {
+                hamburgerBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
         } else {
             // Open the menu
             mobileNav.classList.add('open');
             overlay.classList.add('show');
-            hamburgerBtn.innerHTML = '<i class="fas fa-times"></i>';
+            if (hamburgerBtn) {
+                hamburgerBtn.innerHTML = '<i class="fas fa-times"></i>';
+            }
         }
     };
 });
