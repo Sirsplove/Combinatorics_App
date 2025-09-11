@@ -2059,4 +2059,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     };
+    
+    // Handle overlay click to close menu
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileNav();
+        });
+    }
 });

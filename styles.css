@@ -1522,10 +1522,12 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
         z-index: 1500;
         opacity: 0;
         transition: opacity 0.3s ease;
+        pointer-events: none;
     }
     
     .mobile-nav-overlay.show {
         opacity: 1;
+        pointer-events: auto;
     }
     
     /* Mobile section fullscreen mode */
