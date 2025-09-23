@@ -365,8 +365,11 @@ function showProblem(problemId) {
     const title = document.getElementById('problem-modal-title');
     const content = document.getElementById('problem-modal-content');
     
+    console.log('Modal elements found:', { modal, title, content });
+    
     if (!modal || !title || !content) {
         console.error('Problem modal elements not found');
+        console.error('Modal:', modal, 'Title:', title, 'Content:', content);
         return;
     }
     
@@ -392,15 +395,19 @@ function showProblem(problemId) {
         </div>
     `;
     
-    modal.style.display = 'block';
-    modal.style.backgroundColor = 'rgba(0, 255, 0, 0.8)'; // Temporary green background for testing
-    console.log('Problem modal opened successfully:', problemId);
-    console.log('Modal display style:', modal.style.display);
-    console.log('Modal computed style:', window.getComputedStyle(modal).display);
-    console.log('Modal visibility:', window.getComputedStyle(modal).visibility);
-    console.log('Modal z-index:', window.getComputedStyle(modal).zIndex);
-    console.log('Modal position:', window.getComputedStyle(modal).position);
-    console.log('Modal element:', modal);
+    try {
+        modal.style.display = 'block';
+        modal.style.backgroundColor = 'rgba(0, 255, 0, 0.8)'; // Temporary green background for testing
+        console.log('Problem modal opened successfully:', problemId);
+        console.log('Modal display style:', modal.style.display);
+        console.log('Modal computed style:', window.getComputedStyle(modal).display);
+        console.log('Modal visibility:', window.getComputedStyle(modal).visibility);
+        console.log('Modal z-index:', window.getComputedStyle(modal).zIndex);
+        console.log('Modal position:', window.getComputedStyle(modal).position);
+        console.log('Modal element:', modal);
+    } catch (error) {
+        console.error('Error opening problem modal:', error);
+    }
 }
 
 // Show learning content in popup (desktop and mobile)
@@ -418,6 +425,8 @@ function showLearningContent(contentId) {
     const title = document.getElementById('learning-modal-title');
     const modalContent = document.getElementById('learning-modal-content');
     
+    console.log('Learning modal elements found:', { modal, title, modalContent });
+    
     if (!modal || !title || !modalContent) {
         console.error('Learning modal elements not found');
         console.error('Modal:', modal, 'Title:', title, 'Content:', modalContent);
@@ -431,15 +440,19 @@ function showLearningContent(contentId) {
         </div>
     `;
     
-    modal.style.display = 'block';
-    modal.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // Temporary red background for testing
-    console.log('Learning modal opened successfully:', contentId);
-    console.log('Modal display style:', modal.style.display);
-    console.log('Modal computed style:', window.getComputedStyle(modal).display);
-    console.log('Modal visibility:', window.getComputedStyle(modal).visibility);
-    console.log('Modal z-index:', window.getComputedStyle(modal).zIndex);
-    console.log('Modal position:', window.getComputedStyle(modal).position);
-    console.log('Modal element:', modal);
+    try {
+        modal.style.display = 'block';
+        modal.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // Temporary red background for testing
+        console.log('Learning modal opened successfully:', contentId);
+        console.log('Modal display style:', modal.style.display);
+        console.log('Modal computed style:', window.getComputedStyle(modal).display);
+        console.log('Modal visibility:', window.getComputedStyle(modal).visibility);
+        console.log('Modal z-index:', window.getComputedStyle(modal).zIndex);
+        console.log('Modal position:', window.getComputedStyle(modal).position);
+        console.log('Modal element:', modal);
+    } catch (error) {
+        console.error('Error opening learning modal:', error);
+    }
 }
 
 // Close popup
