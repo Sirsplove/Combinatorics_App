@@ -1,6 +1,6 @@
 {
-  "name": "Combinatorics App",
-  "short_name": "Combinatorics",
+  "name": "ComboCraft",
+  "short_name": "ComboCraft",
   "description": "Master combinatorics through real-world problems and interactive games",
   "start_url": "/",
   "display": "standalone",

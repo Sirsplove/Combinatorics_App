@@ -886,6 +886,8 @@ const games = {
 };
 
 function startGame(gameType) {
+    console.log('Starting game:', gameType);
+    
     // Use mobile game mode if on mobile
     if (isMobile()) {
         startMobileGame(gameType);
@@ -893,8 +895,18 @@ function startGame(gameType) {
     }
     
     const game = games[gameType];
+    if (!game) {
+        console.error('Game not found:', gameType);
+        return;
+    }
+    
     const workspace = document.getElementById('game-workspace');
     const title = document.getElementById('game-title');
+    
+    if (!workspace || !title) {
+        console.error('Game workspace or title element not found');
+        return;
+    }
     
     title.textContent = game.title;
     workspace.style.display = 'block';
@@ -906,7 +918,7 @@ function startGame(gameType) {
     updateGameStats();
     game.start();
     
-    // Game started - no progress tracking yet
+    console.log('Game started successfully:', gameType);
 }
 
 function closeGame() {
