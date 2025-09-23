@@ -1,13 +1,17 @@
 // Service Worker for Combinatorics App
-const CACHE_NAME = 'combinatorics-app-v1';
+const CACHE_NAME = 'combinatorics-app-v1.1';
 const urlsToCache = [
   '/',
   '/index.html',
   '/styles.css',
   '/script.js',
   '/manifest.json',
+  '/mobile-app.js',
+  '/launcher.html',
+  '/main.js',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+  'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
 // Install event
