@@ -521,7 +521,7 @@ const games = {
             let targetPermutation = shuffleArray([...items]);
             let moves = 0;
             
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Arrange the items to match the target pattern</h4>
@@ -580,7 +580,7 @@ const games = {
             const targetSum = 12;
             let selectedItems = [];
             
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Select exactly 3 balls that sum to ${targetSum}</h4>
@@ -622,7 +622,7 @@ const games = {
         title: "Probability Roulette",
         description: "Predict outcomes and calculate probabilities in real-time!",
         start: function() {
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Predict the probability of different outcomes</h4>
@@ -674,7 +674,7 @@ const games = {
         title: "Sudoku Solver",
         description: "Use combinatorial logic to solve Sudoku puzzles!",
         start: function() {
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Solve the Sudoku puzzle using combinatorial logic</h4>
@@ -706,7 +706,7 @@ const games = {
         title: "Binomial Builder",
         description: "Build and explore Pascal's triangle and binomial expansions!",
         start: function() {
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Build Pascal's triangle and explore binomial expansions</h4>
@@ -749,7 +749,7 @@ const games = {
             
             const currentSeq = sequences[Math.floor(Math.random() * sequences.length)];
             
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Predict the next numbers in the sequence</h4>
@@ -796,7 +796,7 @@ const games = {
         title: "Multiplayer Challenge",
         description: "Compete with friends in real-time combinatorics challenges!",
         start: function() {
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Compete in real-time combinatorics challenges</h4>
@@ -850,7 +850,7 @@ const games = {
                 { id: 'F', x: 300, y: 300, connections: ['D', 'E'] }
             ];
             
-            const gameContent = document.getElementById('game-content');
+            const gameContent = document.getElementById('game-modal-content');
             gameContent.innerHTML = `
                 <div class="game-instructions">
                     <h4>Goal: Find the shortest path from A to F</h4>
@@ -900,16 +900,17 @@ function startGame(gameType) {
         return;
     }
     
-    const workspace = document.getElementById('game-workspace');
-    const title = document.getElementById('game-title');
+    const modal = document.getElementById('game-modal');
+    const title = document.getElementById('game-modal-title');
+    const content = document.getElementById('game-modal-content');
     
-    if (!workspace || !title) {
-        console.error('Game workspace or title element not found');
+    if (!modal || !title || !content) {
+        console.error('Game modal elements not found');
         return;
     }
     
     title.textContent = game.title;
-    workspace.style.display = 'block';
+    modal.style.display = 'block';
     
     currentGame = gameType;
     gameScore = 0;
@@ -922,13 +923,28 @@ function startGame(gameType) {
 }
 
 function closeGame() {
-    document.getElementById('game-workspace').style.display = 'none';
+    // Legacy function - now redirects to modal close
+    closeGameModal();
+}
+
+function closeGameModal() {
+    const modal = document.getElementById('game-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
     currentGame = null;
 }
 
 function updateGameStats() {
-    document.getElementById('score').textContent = `Score: ${gameScore}`;
-    document.getElementById('level').textContent = `Level: ${gameLevel}`;
+    const scoreElement = document.getElementById('modal-score');
+    const levelElement = document.getElementById('modal-level');
+    
+    if (scoreElement) {
+        scoreElement.textContent = `Score: ${gameScore}`;
+    }
+    if (levelElement) {
+        levelElement.textContent = `Level: ${gameLevel}`;
+    }
 }
 
 // Game helper functions

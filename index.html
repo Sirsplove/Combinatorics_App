@@ -259,19 +259,7 @@
                     </div>
                 </div>
                 
-                <div id="game-workspace" class="game-workspace" style="display: none;">
-                    <div class="game-header">
-                        <h3 id="game-title"></h3>
-                        <div class="game-stats">
-                            <span id="score">Score: 0</span>
-                            <span id="level">Level: 1</span>
-                        </div>
-                        <button class="btn btn-outline" onclick="closeGame()">
-                            <i class="fas fa-times"></i> Close
-                        </button>
-                    </div>
-                    <div id="game-content" class="game-content"></div>
-                </div>
+                <!-- Game cards will open in modal instead of inline -->
             </div>
         </section>
 
@@ -486,6 +474,23 @@
                     </div>
                 </div>
                 <!-- Achievement system removed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content game-modal-content">
+            <div class="modal-header">
+                <h2 id="game-modal-title">Game</h2>
+                <button class="modal-close" onclick="closeGameModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-stats">
+                    <span id="modal-score">Score: 0</span>
+                    <span id="modal-level">Level: 1</span>
+                </div>
+                <div id="game-modal-content" class="game-modal-body"></div>
             </div>
         </div>
     </div>
