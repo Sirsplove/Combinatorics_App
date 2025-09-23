@@ -407,28 +407,24 @@ function showLearningContent(contentId) {
     }
     console.log('Learning content found:', content);
     
-    // Create popup container
-    const popup = document.createElement('div');
-    popup.className = 'popup-overlay';
-    popup.id = 'learning-popup';
+    const modal = document.getElementById('learning-modal');
+    const title = document.getElementById('learning-modal-title');
+    const modalContent = document.getElementById('learning-modal-content');
     
-    popup.innerHTML = `
-        <div class="popup-content">
-            <div class="popup-header">
-                <h3>${content.title}</h3>
-                <button class="popup-close" onclick="closePopup('learning-popup')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="popup-body">
-                <div class="learning-content">
-                    ${content.content}
-                </div>
-            </div>
+    if (!modal || !title || !modalContent) {
+        console.error('Learning modal elements not found');
+        return;
+    }
+    
+    title.textContent = content.title;
+    modalContent.innerHTML = `
+        <div class="learning-content">
+            ${content.content}
         </div>
     `;
     
-    document.body.appendChild(popup);
+    modal.style.display = 'block';
+    console.log('Learning modal opened successfully:', contentId);
 }
 
 // Close popup
@@ -933,6 +929,13 @@ function closeGameModal() {
 
 function closeProblemModal() {
     const modal = document.getElementById('problem-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function closeLearningModal() {
+    const modal = document.getElementById('learning-modal');
     if (modal) {
         modal.style.display = 'none';
     }
