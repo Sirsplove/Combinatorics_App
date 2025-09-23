@@ -120,6 +120,11 @@ div, section, article, main, aside {
     color: #00b4d8;
 }
 
+/* Mobile-only class - hide on desktop */
+.mobile-only {
+    display: none !important;
+}
+
 .logo {
     font-size: 1.5rem;
     font-weight: 600;
@@ -715,19 +720,21 @@ div, section, article, main, aside {
     max-width: 600px;
     width: 90%;
     max-height: 80vh;
-    overflow-y: auto;
+    overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(0, 180, 216, 0.3);
 }
 
 .modal-header {
-    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    background: linear-gradient(135deg, #00b4d8, #0096c7);
     color: white;
     padding: 1.5rem 2rem;
     border-radius: 16px 16px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
 }
 
 .modal-close {
@@ -751,12 +758,11 @@ div, section, article, main, aside {
 }
 
 /* Game Modal Specific Styles */
-.modal-content.game-modal-content {
+#game-modal .modal-content {
     max-width: 90vw !important;
     max-height: 90vh !important;
     width: 1000px !important;
     height: 700px !important;
-    margin: 5vh auto !important;
     overflow: hidden !important;
     position: absolute !important;
     top: 50% !important;
@@ -785,12 +791,11 @@ div, section, article, main, aside {
 }
 
 /* Problem Modal Specific Styles */
-.modal-content.problem-modal-content {
+#problem-modal .modal-content {
     max-width: 90vw !important;
     max-height: 90vh !important;
     width: 1000px !important;
     height: 700px !important;
-    margin: 5vh auto !important;
     overflow: hidden !important;
     position: absolute !important;
     top: 50% !important;
@@ -805,12 +810,11 @@ div, section, article, main, aside {
 }
 
 /* Learning Modal Specific Styles */
-.modal-content.learning-modal-content {
+#learning-modal .modal-content {
     max-width: 90vw !important;
     max-height: 90vh !important;
     width: 1000px !important;
     height: 700px !important;
-    margin: 5vh auto !important;
     overflow: hidden !important;
     position: absolute !important;
     top: 50% !important;
@@ -826,8 +830,12 @@ div, section, article, main, aside {
 
 .modal-body {
     padding: 2rem;
-    color: #f0f0f0;
+    color: #e0e0e0;
     line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    overflow-y: auto;
+    max-height: calc(100% - 80px);
 }
 
 .welcome-options {
@@ -1393,10 +1401,9 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     }
     
     /* Game Modal Mobile */
-    .modal-content.game-modal-content {
+    #game-modal .modal-content {
         width: 95vw !important;
         height: 90vh !important;
-        margin: 5vh auto !important;
     }
     
     .game-modal-body {
@@ -1411,10 +1418,9 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     }
     
     /* Problem Modal Mobile */
-    .modal-content.problem-modal-content {
+    #problem-modal .modal-content {
         width: 95vw !important;
         height: 90vh !important;
-        margin: 5vh auto !important;
     }
     
     .problem-modal-body {
@@ -1423,10 +1429,9 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     }
     
     /* Learning Modal Mobile */
-    .modal-content.learning-modal-content {
+    #learning-modal .modal-content {
         width: 95vw !important;
         height: 90vh !important;
-        margin: 5vh auto !important;
     }
     
     .learning-modal-body {
@@ -1778,8 +1783,8 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     
     /* Show mobile nav on mobile */
     @media (max-width: 768px) {
-        .btn-hamburger {
-            display: block;
+        .btn-hamburger.mobile-only {
+            display: block !important;
         }
         
         .mobile-nav {

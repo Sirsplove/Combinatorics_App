@@ -397,7 +397,6 @@ function showProblem(problemId) {
     
     try {
         modal.style.display = 'block';
-        modal.style.backgroundColor = 'rgba(0, 255, 0, 0.8)'; // Temporary green background for testing
         console.log('Problem modal opened successfully:', problemId);
         console.log('Modal display style:', modal.style.display);
         console.log('Modal computed style:', window.getComputedStyle(modal).display);
@@ -442,7 +441,6 @@ function showLearningContent(contentId) {
     
     try {
         modal.style.display = 'block';
-        modal.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // Temporary red background for testing
         console.log('Learning modal opened successfully:', contentId);
         console.log('Modal display style:', modal.style.display);
         console.log('Modal computed style:', window.getComputedStyle(modal).display);
