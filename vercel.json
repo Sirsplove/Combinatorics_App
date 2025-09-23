@@ -5,7 +5,31 @@
   "installCommand": "echo 'No dependencies to install'",
   "routes": [
     {
-      "src": "/(.*\\.(css|js|png|svg|ico|woff|woff2|ttf|eot|json))",
+      "src": "/styles.css",
+      "dest": "/styles.css"
+    },
+    {
+      "src": "/script.js",
+      "dest": "/script.js"
+    },
+    {
+      "src": "/mobile-app.js",
+      "dest": "/mobile-app.js"
+    },
+    {
+      "src": "/main.js",
+      "dest": "/main.js"
+    },
+    {
+      "src": "/sw.js",
+      "dest": "/sw.js"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
+      "src": "/(.*\\.(png|svg|ico|woff|woff2|ttf|eot))",
       "dest": "/$1"
     },
     {
@@ -15,8 +39,25 @@
   ],
   "headers": [
     {
-      "source": "/(.*\\.(css|js|png|svg|ico|woff|woff2|ttf|eot))",
+      "source": "/styles.css",
       "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.js)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        },
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
@@ -26,6 +67,10 @@
     {
       "source": "/sw.js",
       "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        },
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
