@@ -156,3 +156,4 @@ This project is open source and available under the MIT License.
 **Start your combinatorial journey today!** 🚀
 
 Open `index.html` in your browser and begin exploring the fascinating world of combinatorics through real-world applications and engaging games.
+# Force redeploy Mon, Sep 22, 2025 10:54:38 PM
