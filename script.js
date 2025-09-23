@@ -354,7 +354,6 @@ function closeMobileGame() {
 function showProblem(problemId) {
     console.log('showProblem called with:', problemId);
     
-    // On mobile, show as popup (same as desktop)
     const problem = problems[problemId];
     if (!problem) {
         console.log('Problem not found:', problemId);
@@ -362,42 +361,39 @@ function showProblem(problemId) {
     }
     console.log('Problem found:', problem);
     
-    // Create popup container
-    const popup = document.createElement('div');
-    popup.className = 'popup-overlay';
-    popup.id = 'problem-popup';
+    const modal = document.getElementById('problem-modal');
+    const title = document.getElementById('problem-modal-title');
+    const content = document.getElementById('problem-modal-content');
     
-    popup.innerHTML = `
-        <div class="popup-content">
-            <div class="popup-header">
-                <h3>${problem.title}</h3>
-                <button class="popup-close" onclick="closePopup('problem-popup')">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="popup-body">
-                <div class="problem-scenario">
-                    <h4>Scenario:</h4>
-                    <p>${problem.scenario}</p>
-                </div>
-                <div class="problem-approach">
-                    <h4>Combinatorics Approach:</h4>
-                    <p>${problem.approach}</p>
-                </div>
-                <div class="problem-solution">
-                    <h4>Solution:</h4>
-                    <p>${problem.solution}</p>
-                </div>
-                <div class="problem-actions">
-                    <button class="btn btn-primary" onclick="solveProblem('${problemId}')">
-                        Mark as Solved
-                    </button>
-                </div>
-            </div>
+    if (!modal || !title || !content) {
+        console.error('Problem modal elements not found');
+        return;
+    }
+    
+    title.textContent = problem.title;
+    
+    content.innerHTML = `
+        <div class="problem-scenario">
+            <h4>Scenario:</h4>
+            <p>${problem.scenario}</p>
+        </div>
+        <div class="problem-approach">
+            <h4>Combinatorics Approach:</h4>
+            <p>${problem.approach}</p>
+        </div>
+        <div class="problem-solution">
+            <h4>Solution:</h4>
+            <p>${problem.solution}</p>
+        </div>
+        <div class="problem-actions">
+            <button class="btn btn-primary" onclick="solveProblem('${problemId}')">
+                Mark as Solved
+            </button>
         </div>
     `;
     
-    document.body.appendChild(popup);
+    modal.style.display = 'block';
+    console.log('Problem modal opened successfully:', problemId);
 }
 
 // Show learning content in popup (desktop and mobile)
@@ -933,6 +929,13 @@ function closeGameModal() {
         modal.style.display = 'none';
     }
     currentGame = null;
+}
+
+function closeProblemModal() {
+    const modal = document.getElementById('problem-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 function updateGameStats() {
