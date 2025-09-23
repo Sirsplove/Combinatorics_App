@@ -394,6 +394,8 @@ function showProblem(problemId) {
     
     modal.style.display = 'block';
     console.log('Problem modal opened successfully:', problemId);
+    console.log('Modal display style:', modal.style.display);
+    console.log('Modal computed style:', window.getComputedStyle(modal).display);
 }
 
 // Show learning content in popup (desktop and mobile)
@@ -413,6 +415,7 @@ function showLearningContent(contentId) {
     
     if (!modal || !title || !modalContent) {
         console.error('Learning modal elements not found');
+        console.error('Modal:', modal, 'Title:', title, 'Content:', modalContent);
         return;
     }
     
@@ -425,6 +428,8 @@ function showLearningContent(contentId) {
     
     modal.style.display = 'block';
     console.log('Learning modal opened successfully:', contentId);
+    console.log('Modal display style:', modal.style.display);
+    console.log('Modal computed style:', window.getComputedStyle(modal).display);
 }
 
 // Close popup
