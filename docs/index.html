@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ComboCraft - Interactive Combinatorics Learning</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00b4d8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Combinatorics App">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05NiA0OEM4MS42NDA2IDQ4IDcwIDU5LjY0MDYgNzAgNzRWNzRDNzAgODguMzU5NCA4MS42NDA2IDEwMCA5NiAxMDBDMTEwLjM1OSAxMDAgMTIyIDg4LjM1OTQgMTIyIDc0Vjc0QzEyMiA1OS42NDA2IDExMC4zNTkgNDggOTYgNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDggMTIyQzMzLjY0MDYgMTIyIDIyIDEzMy42NDEgMjIgMTQ4VjE0OEMyMiAxNjIuMzU5IDMzLjY0MDYgMTc0IDQ4IDE3NEM2Mi4zNTk0IDE3NCA3NCAxNjIuMzU5IDc0IDE0OFYxNDhDNzQgMTMzLjY0MSA2Mi4zNTk0IDEyMiA0OCAxMjJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTQ0IDEyMkMxMjkuNjQxIDEyMiAxMTggMTMzLjY0MSAxMTggMTQ4VjE0OEMxMTggMTYyLjM1OSAxMjkuNjQxIDE3NCAxNDQgMTc0QzE1OC4zNTkgMTc0IDE3MCAxNjIuMzU5IDE3MCAxNDhWMTQ4QzE3MCAxMzMuNjQxIDE1OC4zNTkgMTIyIDE0NCAxMjJaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDBfbGluZWFyXzFfMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMTkyIiB5Mj0iMTkyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiM2NjdlZWEiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNzY0YmEyIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHN2Zz4K">
+    
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Mobile app enhancements -->
+    <script src="mobile-app.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-calculator"></i>
+                ComboCraft
+            </h1>
+            <nav class="nav">
+                <a href="#home" class="nav-link active" data-tooltip="Start here">Home</a>
+                <a href="#studio" class="nav-link" data-tooltip="See counting visually">Studio</a>
+                <a href="#learn" class="nav-link" data-tooltip="Guided lessons">Learn</a>
+                <a href="#calculator" class="nav-link" data-tooltip="Calculate with visuals">Calculator</a>
+                <a href="#problems" class="nav-link" data-tooltip="Real-world problems">Problems</a>
+                <a href="#games" class="nav-link" data-tooltip="Practice games">Games</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-hamburger mobile-only" onclick="toggleMobileNav()" title="Menu" id="hamburger-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="btn-theme" onclick="toggleTheme()" title="Toggle Theme">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="btn-help" onclick="showHelp()" title="Get Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <button class="btn-tour" onclick="startTour()" title="Take a Tour">
+                    <i class="fas fa-map-marked-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Welcome Modal -->
+        <div id="welcome-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Welcome to ComboCraft</h2>
+                    <button class="modal-close" onclick="closeWelcomeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Ready to master combinatorics through real-world problems and fun games?</p>
+                    <div class="welcome-options">
+                        <button class="btn btn-primary" onclick="startTour(); closeWelcomeModal();">
+                            <i class="fas fa-map-marked-alt"></i> Take a Tour
+                        </button>
+                        <button class="btn btn-secondary" onclick="closeWelcomeModal()">
+                            <i class="fas fa-play"></i> Start Exploring
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <p class="eyebrow">Learn by seeing, not memorizing</p>
+                    <h2>Combinatorics, made visual</h2>
+                    <p>Start with one question: <strong>does order matter?</strong> Then pick items, watch every arrangement appear, and the formula will click.</p>
+                    
+                    <!-- Quick Start Guide -->
+                    <div class="quick-start">
+                        <h3>🚀 Quick Start Guide</h3>
+                        <div class="start-steps">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <strong>See it</strong>
+                                    <p>Build permutations and combinations with colored tiles</p>
+                                    <button class="btn btn-small" onclick="showSection('studio')">Open Studio</button>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <strong>Choose the formula</strong>
+                                    <p>Answer two questions and get the right counting rule</p>
+                                    <button class="btn btn-small" onclick="showSection('learn')">Which formula?</button>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <strong>Check the math</strong>
+                                    <p>Calculator now shows the objects, not only the number</p>
+                                    <button class="btn btn-small" onclick="showSection('calculator')">Open Calculator</button>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <strong>Apply it</strong>
+                                    <p>Practice with problems and short games</p>
+                                    <button class="btn btn-small" onclick="showSection('games')">Play Games</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showSection('studio')">
+                            <i class="fas fa-th"></i> Try the studio
+                        </button>
+                        <button class="btn btn-secondary" onclick="showSection('learn')">
+                            <i class="fas fa-compass"></i> Which formula?
+                        </button>
+                        <button class="btn btn-outline" onclick="startTour()">
+                            <i class="fas fa-map-marked-alt"></i> Take a tour
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>See every outcome</h3>
+                        <p>Watch ABC and BAC as different (permutation) or the same (combination)</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Pick the right tool</h3>
+                        <p>Order? Repeats? Two answers pick nPr, nCr, n^r, or stars-and-bars</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Practice with feedback</h3>
+                        <p>Calculator, problems, and games all use the same visual language</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Counting Studio -->
+        <section id="studio" class="section">
+            <div class="container">
+                <h2>Counting studio</h2>
+                <p class="section-lede">Toggle whether order matters, then tap tiles. Identical groups collapse when order does not count.</p>
+                <div class="studio-shell">
+                    <div class="studio-controls">
+                        <div class="control-block">
+                            <label>Items (n)</label>
+                            <input type="range" id="studio-n" min="3" max="6" value="4" oninput="renderStudio()">
+                            <span id="studio-n-label">4</span>
+                        </div>
+                        <div class="control-block">
+                            <label>Chosen (r)</label>
+                            <input type="range" id="studio-r" min="1" max="4" value="2" oninput="renderStudio()">
+                            <span id="studio-r-label">2</span>
+                        </div>
+                        <div class="mode-toggle" role="group" aria-label="Counting mode">
+                            <button type="button" class="mode-btn active" id="mode-perm" onclick="setStudioMode('permutation')">Order matters<br><small>Permutations P(n,r)</small></button>
+                            <button type="button" class="mode-btn" id="mode-comb" onclick="setStudioMode('combination')">Order does not<br><small>Combinations C(n,r)</small></button>
+                        </div>
+                    </div>
+                    <div class="studio-pool">
+                        <h3>Pool</h3>
+                        <p>Tap to fill the next slot. Tap a slot to undo.</p>
+                        <div id="studio-pool" class="chip-row"></div>
+                        <div class="slot-row" id="studio-slots"></div>
+                        <div class="studio-actions">
+                            <button class="btn btn-small btn-secondary" onclick="studioRandomPick()">Random pick</button>
+                            <button class="btn btn-small btn-outline" onclick="studioClear()">Clear</button>
+                        </div>
+                    </div>
+                    <div class="studio-result">
+                        <div class="formula-card" id="studio-formula"></div>
+                        <p class="studio-hint" id="studio-hint"></p>
+                        <h3>All outcomes</h3>
+                        <div id="studio-outcomes" class="outcome-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real Problems Section -->
+        <section id="problems" class="section">
+            <div class="container">
+                <h2>Real-World Combinatorics Problems</h2>
+                <div class="problem-categories">
+                    <div class="category-card" onclick="showProblem('scheduling')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Scheduling Problems</h3>
+                        <p>Optimize schedules, minimize conflicts, and maximize efficiency</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('optimization')">
+                        <i class="fas fa-route"></i>
+                        <h3>Route Optimization</h3>
+                        <p>Find optimal paths, minimize travel time, and reduce costs</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('counting')">
+                        <i class="fas fa-list-ol"></i>
+                        <h3>Counting Problems</h3>
+                        <p>Count arrangements, selections, and configurations</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('probability')">
+                        <i class="fas fa-dice"></i>
+                        <h3>Probability & Risk</h3>
+                        <p>Calculate probabilities and assess risks in decision making</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('genetics')">
+                        <i class="fas fa-dna"></i>
+                        <h3>Genetics & Biology</h3>
+                        <p>Analyze DNA sequences, genetic combinations, and evolutionary patterns</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('cryptography')">
+                        <i class="fas fa-lock"></i>
+                        <h3>Cryptography</h3>
+                        <p>Break codes, analyze encryption strength, and secure communications</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('network')">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Network Analysis</h3>
+                        <p>Analyze social networks, internet routing, and connection patterns</p>
+                    </div>
+                    <div class="category-card" onclick="showProblem('finance')">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Financial Modeling</h3>
+                        <p>Portfolio optimization, risk assessment, and market analysis</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games" class="section">
+            <div class="container">
+                <h2>Combinatorics Games</h2>
+                <div class="games-grid">
+                    <div class="game-card" onclick="startGame('permutation-puzzle')">
+                        <i class="fas fa-shuffle"></i>
+                        <h3>Permutation Puzzle</h3>
+                        <p>Arrange items in different orders and discover patterns</p>
+                        <div class="difficulty">Easy</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('combination-challenge')">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Combination Challenge</h3>
+                        <p>Select groups of items and explore selection strategies</p>
+                        <div class="difficulty">Medium</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('probability-roulette')">
+                        <i class="fas fa-circle-notch"></i>
+                        <h3>Probability Roulette</h3>
+                        <p>Predict outcomes and calculate probabilities in real-time</p>
+                        <div class="difficulty">Medium</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('graph-traversal')">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Graph Traversal</h3>
+                        <p>Navigate networks and find optimal paths</p>
+                        <div class="difficulty">Hard</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('sudoku-solver')">
+                        <i class="fas fa-th"></i>
+                        <h3>Sudoku Solver</h3>
+                        <p>Use combinatorial logic to solve Sudoku puzzles</p>
+                        <div class="difficulty">Hard</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('binomial-builder')">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Binomial Builder</h3>
+                        <p>Build and explore Pascal's triangle and binomial expansions</p>
+                        <div class="difficulty">Medium</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('sequence-predictor')">
+                        <i class="fas fa-sort-numeric-up"></i>
+                        <h3>Sequence Predictor</h3>
+                        <p>Find patterns in number sequences using combinatorial analysis</p>
+                        <div class="difficulty">Hard</div>
+                    </div>
+                    <div class="game-card" onclick="startGame('multiplayer-challenge')">
+                        <i class="fas fa-users"></i>
+                        <h3>Multiplayer Challenge</h3>
+                        <p>Compete with friends in real-time combinatorics challenges</p>
+                        <div class="difficulty">Any</div>
+                    </div>
+                </div>
+                
+                <!-- Game cards will open in modal instead of inline -->
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section id="calculator" class="section">
+            <div class="container">
+                <h2>Combinatorics Calculator</h2>
+                <div class="calculator-workspace">
+                    <div class="calc-inputs">
+                        <div class="input-group">
+                            <label for="calc-type">Calculation Type:</label>
+                            <select id="calc-type" onchange="updateCalculator()">
+                                <option value="permutation">Permutation (nPr)</option>
+                                <option value="combination">Combination (nCr)</option>
+                                <option value="factorial">Factorial (n!)</option>
+                                <option value="subsets">Number of Subsets</option>
+                                <option value="binomial">Binomial Coefficient</option>
+                                <option value="multinomial">Multinomial Coefficient</option>
+                                <option value="stirling">Stirling Numbers</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="n-value">n (total items):</label>
+                            <input type="number" id="n-value" min="0" max="100" value="5" onchange="updateCalculator()">
+                        </div>
+                        <div class="input-group" id="r-group">
+                            <label for="r-value">r (selected items):</label>
+                            <input type="number" id="r-value" min="0" max="100" value="3" onchange="updateCalculator()">
+                        </div>
+                        <div class="input-group" id="k-group" style="display: none;">
+                            <label for="k-value">k (third parameter):</label>
+                            <input type="number" id="k-value" min="0" max="100" value="2" onchange="updateCalculator()">
+                        </div>
+                    </div>
+                    <div class="calc-result">
+                        <h3>Result:</h3>
+                        <div id="calc-answer" class="answer">120</div>
+                        <p class="calc-plain" id="calc-plain"></p>
+                        <div id="calc-visual" class="calc-visual"></div>
+                        <div id="calc-explanation" class="explanation">
+                            <h4>Step-by-step solution:</h4>
+                            <div id="calc-steps"></div>
+                        </div>
+                        <div class="calc-actions">
+                            <button class="btn btn-primary" onclick="exportSolution()">
+                                <i class="fas fa-download"></i> Export Solution
+                            </button>
+                            <button class="btn btn-secondary" onclick="visualizeResult()">
+                                <i class="fas fa-chart-bar"></i> Visualize
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Visualization Section -->
+                <div class="visualization-workspace" id="visualization-workspace" style="display: none;">
+                    <div class="viz-header">
+                        <h3>Data Visualization</h3>
+                        <button class="btn btn-outline" onclick="closeVisualization()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    <div class="viz-content">
+                        <canvas id="probabilityChart" width="400" height="200"></canvas>
+                        <div class="viz-controls">
+                            <button class="btn btn-small" onclick="updateChart('bar')">Bar Chart</button>
+                            <button class="btn btn-small" onclick="updateChart('line')">Line Chart</button>
+                            <button class="btn btn-small" onclick="updateChart('pie')">Pie Chart</button>
+                            <button class="btn btn-small" onclick="updateChart('doughnut')">Doughnut</button>
+                            <button class="btn btn-small" onclick="updateChart('scatter')">Scatter Plot</button>
+                            <button class="btn btn-small" onclick="updateChart('radar')">Radar Chart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn Section -->
+        <section id="learn" class="section">
+            <div class="container">
+                <h2>Learn combinatorics</h2>
+                <p class="section-lede">Most counting problems collapse to two questions. Answer them, then open a short lesson.</p>
+                <div class="chooser" id="formula-chooser">
+                    <h3>Which formula?</h3>
+                    <div class="chooser-q">
+                        <p>Does the order of items matter?</p>
+                        <button class="btn btn-small" data-order="yes" onclick="setChooser('order','yes')">Yes — ABC ≠ BAC</button>
+                        <button class="btn btn-small" data-order="no" onclick="setChooser('order','no')">No — ABC = BAC</button>
+                    </div>
+                    <div class="chooser-q">
+                        <p>Can the same item be used more than once?</p>
+                        <button class="btn btn-small" data-repeat="no" onclick="setChooser('repeat','no')">No repeats</button>
+                        <button class="btn btn-small" data-repeat="yes" onclick="setChooser('repeat','yes')">Repeats allowed</button>
+                    </div>
+                    <div class="chooser-answer" id="chooser-answer">
+                        Answer both questions to see the formula.
+                    </div>
+                </div>
+                <div class="compare-grid">
+                    <div class="compare-card">
+                        <h3>Permutation</h3>
+                        <p class="formula-inline">P(n,r) = n! / (n−r)!</p>
+                        <p>Race finish order, passwords, seating. Sequence is the answer.</p>
+                    </div>
+                    <div class="compare-card">
+                        <h3>Combination</h3>
+                        <p class="formula-inline">C(n,r) = n! / (r!(n−r)!)</p>
+                        <p>Committees, pizza toppings, lottery tickets. The set is the answer.</p>
+                    </div>
+                </div>
+                <div class="learning-modules">
+                    <div class="module-card" onclick="showLearningContent('basics')">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Fundamentals</h3>
+                        <p>Counting principles, with a 3-question check</p>
+                    </div>
+                    <div class="module-card" onclick="showLearningContent('advanced')">
+                        <i class="fas fa-brain"></i>
+                        <h3>Next ideas</h3>
+                        <p>Pigeonhole, inclusion-exclusion, graphs — in plain language</p>
+                    </div>
+                    <div class="module-card" onclick="showLearningContent('applications')">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Where it shows up</h3>
+                        <p>Passwords, DNA, schedules, and games</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Multiplayer Section -->
+        <section id="multiplayer" class="section">
+            <div class="container">
+                <h2>Multiplayer Challenges</h2>
+                <div class="multiplayer-workspace">
+                    <div class="lobby-section">
+                        <h3>Join or Create a Challenge</h3>
+                        <div class="lobby-actions">
+                            <button class="btn btn-primary" onclick="createRoom()">
+                                <i class="fas fa-plus"></i> Create Room
+                            </button>
+                            <button class="btn btn-secondary" onclick="joinRoom()">
+                                <i class="fas fa-sign-in-alt"></i> Join Room
+                            </button>
+                        </div>
+                        <div class="room-code-input" style="display: none;">
+                            <input type="text" id="room-code" placeholder="Enter room code">
+                            <button class="btn btn-primary" onclick="connectToRoom()">Connect</button>
+                        </div>
+                    </div>
+                    
+                    <div class="leaderboard-section">
+                        <h3>Global Leaderboard</h3>
+                        <div class="leaderboard">
+                            <div class="leaderboard-item">
+                                <span class="rank">1</span>
+                                <span class="name">MathMaster</span>
+                                <span class="score">2,450</span>
+                            </div>
+                            <div class="leaderboard-item">
+                                <span class="rank">2</span>
+                                <span class="name">ComboKing</span>
+                                <span class="score">2,100</span>
+                            </div>
+                            <div class="leaderboard-item">
+                                <span class="rank">3</span>
+                                <span class="name">PermutationPro</span>
+                                <span class="score">1,850</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Help & Tips 💡</h2>
+                <button class="modal-close" onclick="closeHelpModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="help-sections">
+                    <div class="help-section">
+                        <h3><i class="fas fa-home"></i> Getting Started</h3>
+                        <ul>
+                            <li>Start with the <strong>Learn</strong> section to understand the basics</li>
+                            <li>Use the <strong>Calculator</strong> to practice calculations</li>
+                            <li>Try <strong>Real Problems</strong> to apply your knowledge</li>
+                            <li>Play <strong>Games</strong> to reinforce learning</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3><i class="fas fa-keyboard"></i> Navigation Tips</h3>
+                        <ul>
+                            <li>Click navigation links to switch between sections</li>
+                            <li>Use the <strong>Tour</strong> button for a guided walkthrough</li>
+                            <li>Hover over navigation items for quick descriptions</li>
+                            <li>All features work on mobile devices too!</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h3><i class="fas fa-gamepad"></i> Game Tips</h3>
+                        <ul>
+                            <li><strong>Permutation Puzzle:</strong> Click two items to swap them</li>
+                            <li><strong>Combination Challenge:</strong> Select items that sum to the target</li>
+                            <li><strong>Probability Roulette:</strong> Enter probabilities as decimals (0.5 for 50%)</li>
+                            <li><strong>Graph Traversal:</strong> Click connected nodes to build your path</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Modal -->
+    <div id="progress-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Progress 📊</h2>
+                <button class="modal-close" onclick="closeProgressModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="problems-solved">0</div>
+                        <div class="stat-label">Problems Solved</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="games-completed">0</div>
+                        <div class="stat-label">Games Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="calculations-done">0</div>
+                        <div class="stat-label">Calculations Done</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="total-score">0</div>
+                        <div class="stat-label">Total Score</div>
+                    </div>
+                </div>
+                <!-- Achievement system removed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="game-modal" class="modal">
+        <div class="modal-content game-modal-content">
+            <div class="modal-header">
+                <h2 id="game-modal-title">Game</h2>
+                <button class="modal-close" onclick="closeGameModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="game-stats">
+                    <span id="modal-score">Score: 0</span>
+                    <span id="modal-level">Level: 1</span>
+                </div>
+                <div id="game-modal-content" class="game-modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Modal -->
+    <div id="problem-modal" class="modal">
+        <div class="modal-content problem-modal-content">
+            <div class="modal-header">
+                <h2 id="problem-modal-title">Problem</h2>
+                <button class="modal-close" onclick="closeProblemModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="problem-modal-content" class="problem-modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Modal -->
+    <div id="learning-modal" class="modal">
+        <div class="modal-content learning-modal-content">
+            <div class="modal-header">
+                <h2 id="learning-modal-title">Learning</h2>
+                <button class="modal-close" onclick="closeLearningModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="learning-modal-content" class="learning-modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour Overlay -->
+    <div id="tour-overlay" class="tour-overlay" style="display: none;">
+        <div class="tour-content">
+            <div class="tour-header">
+                <h3 id="tour-title">Welcome to Combinatorics App!</h3>
+                <div class="tour-progress">
+                    <span id="tour-step">1</span> of <span id="tour-total">5</span>
+                </div>
+            </div>
+            <div class="tour-body">
+                <p id="tour-description">Let's take a quick tour to get you started!</p>
+            </div>
+            <div class="tour-actions">
+                <button class="btn btn-outline" onclick="previousTourStep()" id="tour-prev" style="display: none;">Previous</button>
+                <button class="btn btn-primary" onclick="nextTourStep()" id="tour-next">Next</button>
+                <button class="btn btn-secondary" onclick="endTour()" id="tour-skip">Skip Tour</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Combinatorics App. Learn, practice, and master combinatorial thinking!</p>
+                <div class="footer-actions">
+                    <button class="btn btn-small btn-outline" onclick="showProgressModal()">
+                        <i class="fas fa-chart-line"></i> View Progress
+                    </button>
+                    <button class="btn btn-small btn-outline" onclick="showHelp()">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <h3>Navigation</h3>
+            <button class="mobile-nav-close" onclick="toggleMobileNav()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-nav-items">
+            <a href="#" class="mobile-nav-item" onclick="showSection('home'); toggleMobileNav();">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('studio'); toggleMobileNav();">
+                <i class="fas fa-th"></i>
+                <span>Studio</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('learn'); toggleMobileNav();">
+                <i class="fas fa-book"></i>
+                <span>Learn</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('calculator'); toggleMobileNav();">
+                <i class="fas fa-calculator"></i>
+                <span>Calculator</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('problems'); toggleMobileNav();">
+                <i class="fas fa-puzzle-piece"></i>
+                <span>Problems</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('games'); toggleMobileNav();">
+                <i class="fas fa-gamepad"></i>
+                <span>Games</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
