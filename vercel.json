@@ -1,5 +1,6 @@
 {
-  "rewrites": [
-    { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
-  ]
+  "framework": null,
+  "installCommand": "echo skipping npm install",
+  "buildCommand": "node scripts/build-web.js",
+  "outputDirectory": "public"
 }
