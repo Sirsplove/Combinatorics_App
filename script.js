@@ -19,7 +19,7 @@ let currentTourStep = 0;
 const tourSteps = [
     {
         title: "Welcome to Combinatorics App! 🎉",
-        description: "This app helps you master combinatorics through real-world problems and fun games. Let's take a quick tour!",
+        description: "ComboCraft teaches counting by showing every outcome. Start in the studio, then use the formula chooser.",
         target: null
     },
     {
@@ -29,7 +29,7 @@ const tourSteps = [
     },
     {
         title: "Quick Start Guide",
-        description: "Follow these 4 steps to get the most out of the app. Start with learning the basics, then practice with the calculator.",
+        description: "See it, pick a formula, check the math, then practice. The studio is the fastest way to build intuition.",
         target: ".quick-start"
     },
     {
@@ -58,7 +58,8 @@ function showSection(sectionId) {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
-    document.querySelector(`[href="#${sectionId}"]`).classList.add('active');
+    const navLink = document.querySelector(`[href="#${sectionId}"]`);
+    if (navLink) navLink.classList.add('active');
     
     // Update mobile navigation
     document.querySelectorAll('.mobile-nav-item').forEach(item => {
@@ -68,11 +69,19 @@ function showSection(sectionId) {
     // Map section IDs to mobile nav items
     const sectionMap = {
         'home': 0,
-        'problems': 1,
-        'games': 2,
+        'studio': 1,
+        'learn': 2,
         'calculator': 3,
-        'learn': 4
+        'problems': 4,
+        'games': 5
     };
+
+    if (sectionId === 'studio') {
+        renderStudio();
+    }
+    if (sectionId === 'calculator') {
+        updateCalculator();
+    }
     
     const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
     if (mobileNavItems[sectionMap[sectionId]]) {
@@ -468,34 +477,30 @@ const learningContent = {
     basics: {
         title: "Combinatorics Fundamentals",
         content: `
-            <h4>Basic Counting Principles</h4>
-            <p>Combinatorics is the branch of mathematics concerned with counting, arrangement, and selection of objects. The fundamental principle states that if one event can occur in m ways and a second event can occur in n ways, then the two events can occur in m × n ways.</p>
-            
-            <h4>Permutations</h4>
-            <p>A permutation is an arrangement of objects in a specific order. The number of permutations of n objects taken r at a time is P(n,r) = n!/(n-r)!</p>
-            
-            <h4>Combinations</h4>
-            <p>A combination is a selection of objects where order doesn't matter. The number of combinations of n objects taken r at a time is C(n,r) = n!/(r!(n-r)!)</p>
-            
-            <h4>Examples</h4>
-            <p>• How many ways can you arrange 5 books on a shelf? Answer: 5! = 120 ways</p>
-            <p>• How many ways can you choose 3 students from a class of 20? Answer: C(20,3) = 1,140 ways</p>
+            <h4>The only two ideas you need first</h4>
+            <p><strong>Multiply</strong> when you do A <em>and then</em> B (3 shirts × 4 pants = 12 outfits).</p>
+            <p><strong>Add</strong> when you do A <em>or</em> B, not both (walk or bike: 2 + 3 = 5 routes).</p>
+            <h4>Permutation vs combination</h4>
+            <p>Finish line of a race: gold, silver, bronze — order matters → P(n,3).</p>
+            <p>Pick 3 toppings for a pizza — order does not matter → C(n,3).</p>
+            <p>That is why C(n,r) = P(n,r) / r!: each group of r items is counted r! times as a permutation.</p>
+            <h4>Quick check</h4>
+            <p>A locker code uses 4 distinct digits from 0–9. Order matters, no repeats. How many codes?</p>
+            <p><button class="btn btn-small" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">Show answer</button></p>
+            <p hidden>P(10,4) = 10×9×8×7 = 5,040. If repeats were allowed it would be 10<sup>4</sup> = 10,000.</p>
         `
     },
     advanced: {
         title: "Advanced Combinatorics Topics",
         content: `
-            <h4>Generating Functions</h4>
-            <p>Generating functions are a powerful tool for solving combinatorial problems. They transform counting problems into algebraic problems.</p>
-            
-            <h4>Recurrence Relations</h4>
-            <p>Many combinatorial sequences satisfy recurrence relations, where each term is defined in terms of previous terms.</p>
-            
-            <h4>Graph Theory</h4>
-            <p>Graph theory studies relationships between objects. It's fundamental to network analysis, scheduling, and optimization problems.</p>
-            
-            <h4>Inclusion-Exclusion Principle</h4>
-            <p>This principle helps count objects that satisfy at least one of several properties by including and excluding overlapping cases.</p>
+            <h4>Pigeonhole principle</h4>
+            <p>If 13 people are in a room, at least two share a birth month. 13 pigeons, 12 holes.</p>
+            <h4>Inclusion-exclusion</h4>
+            <p>|A ∪ B| = |A| + |B| − |A ∩ B|. Add both sets, then subtract people counted twice.</p>
+            <h4>Graphs</h4>
+            <p>Classes as dots, conflicts as lines. Coloring the dots with time slots is scheduling.</p>
+            <h4>When you are ready</h4>
+            <p>Generating functions and recurrences encode sequences as algebra. Open the studio first until P vs C feels obvious.</p>
         `
     },
     applications: {
@@ -1297,11 +1302,187 @@ function updateCalculator() {
     }
     
     document.getElementById('calc-answer').textContent = result;
+    const plain = document.getElementById('calc-plain');
+    if (plain) {
+        const phrases = {
+            permutation: `Number of ways to line up ${r} items from ${n} when order matters.`,
+            combination: `Number of groups of ${r} from ${n} when order does not matter.`,
+            factorial: `Ways to line up all ${n} distinct items.`,
+            subsets: `Every item can be in or out: 2 choices ${n} times.`,
+            binomial: `Same as combinations: C(${n},${r}).`,
+            multinomial: `Ways to split ${n} items into labeled groups.`,
+            stirling: `Ways to partition ${n} items into ${r} nonempty unlabeled groups.`
+        };
+        plain.textContent = phrases[calcType] || '';
+    }
+    const viz = document.getElementById('calc-visual');
+    if (viz) {
+        viz.innerHTML = buildCalcVisual(calcType, n, r, result);
+    }
     document.getElementById('calc-steps').innerHTML = steps.map(step => 
         `<div class="step">${step}</div>`
     ).join('');
     
     // Track calculation completion
+}
+
+function buildCalcVisual(type, n, r, result) {
+    const labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, Math.min(n, 12)).split('');
+    if (type === 'permutation' || type === 'combination') {
+        const outcomes = type === 'permutation'
+            ? permute(labels, Math.min(r, labels.length)).slice(0, 24)
+            : combine(labels, Math.min(r, labels.length)).slice(0, 24);
+        const more = typeof result === 'number' && result > outcomes.length
+            ? `<p class="viz-more">Showing ${outcomes.length} of ${result}</p>` : '';
+        return `<div class="outcome-grid">${outcomes.map(o => `<span class="outcome">${o.join('')}</span>`).join('')}</div>${more}`;
+    }
+    if (type === 'factorial') {
+        return `<p class="viz-more">${labels.join(' × ')} and every other order of these letters.</p>`;
+    }
+    if (type === 'subsets') {
+        const sets = allSubsets(labels.slice(0, Math.min(n, 5))).slice(0, 16);
+        return `<div class="outcome-grid">${sets.map(s => `<span class="outcome">{${s.join('') || '∅'}}</span>`).join('')}</div>`;
+    }
+    return '';
+}
+
+function permute(arr, r) {
+    if (r === 0) return [[]];
+    const out = [];
+    arr.forEach((item, i) => {
+        const rest = arr.filter((_, j) => j !== i);
+        permute(rest, r - 1).forEach(tail => out.push([item, ...tail]));
+    });
+    return out;
+}
+
+function combine(arr, r) {
+    if (r === 0) return [[]];
+    if (arr.length < r) return [];
+    const [first, ...rest] = arr;
+    return combine(rest, r - 1).map(c => [first, ...c]).concat(combine(rest, r));
+}
+
+function allSubsets(arr) {
+    return arr.reduce((sets, item) => sets.concat(sets.map(s => [...s, item])), [[]]);
+}
+
+const STUDIO_ITEMS = [
+    { id: 'A', color: '#00b4d8' },
+    { id: 'B', color: '#f77f00' },
+    { id: 'C', color: '#9b5de5' },
+    { id: 'D', color: '#00c853' },
+    { id: 'E', color: '#ef476f' },
+    { id: 'F', color: '#ffd166' }
+];
+
+let studioMode = 'permutation';
+let studioPicks = [];
+let chooser = { order: null, repeat: null };
+
+function setStudioMode(mode) {
+    studioMode = mode;
+    studioPicks = [];
+    document.getElementById('mode-perm').classList.toggle('active', mode === 'permutation');
+    document.getElementById('mode-comb').classList.toggle('active', mode === 'combination');
+    renderStudio();
+}
+
+function renderStudio() {
+    const nSlider = document.getElementById('studio-n');
+    const rSlider = document.getElementById('studio-r');
+    if (!nSlider) return;
+    let n = parseInt(nSlider.value, 10);
+    rSlider.max = n;
+    if (parseInt(rSlider.value, 10) > n) rSlider.value = n;
+    let r = parseInt(rSlider.value, 10);
+    document.getElementById('studio-n-label').textContent = n;
+    document.getElementById('studio-r-label').textContent = r;
+    const items = STUDIO_ITEMS.slice(0, n);
+    studioPicks = studioPicks.filter(id => items.some(it => it.id === id)).slice(0, r);
+
+    const pool = document.getElementById('studio-pool');
+    pool.innerHTML = items.map(it => {
+        const used = studioPicks.includes(it.id);
+        return `<button type="button" class="chip" style="--chip:${it.color}" ${used ? 'disabled' : ''} onclick="studioPick('${it.id}')">${it.id}</button>`;
+    }).join('');
+
+    const slots = document.getElementById('studio-slots');
+    slots.innerHTML = Array.from({ length: r }, (_, i) => {
+        const id = studioPicks[i];
+        const it = items.find(x => x.id === id);
+        if (!it) return `<button type="button" class="slot empty">?</button>`;
+        return `<button type="button" class="slot" style="--chip:${it.color}" onclick="studioUnpick(${i})">${it.id}</button>`;
+    }).join('');
+
+    const count = studioMode === 'permutation'
+        ? factorial(n) / factorial(n - r)
+        : factorial(n) / (factorial(r) * factorial(n - r));
+    const formula = studioMode === 'permutation'
+        ? `P(${n},${r}) = ${n}! / ${n - r}! = ${count}`
+        : `C(${n},${r}) = ${n}! / (${r}! × ${n - r}!) = ${count}`;
+    document.getElementById('studio-formula').innerHTML = `<strong>${formula}</strong><span>${studioMode === 'permutation' ? 'Each order is a different outcome.' : 'Only the set of letters matters.'}</span>`;
+    document.getElementById('studio-hint').textContent = studioPicks.length === r
+        ? (studioMode === 'permutation'
+            ? `${studioPicks.join('')} is one of ${count} ordered lists.`
+            : `{${[...studioPicks].sort().join('')}} is one of ${count} unordered groups.`)
+        : `Pick ${r - studioPicks.length} more.`;
+
+    const labels = items.map(it => it.id);
+    const outcomes = studioMode === 'permutation' ? permute(labels, r) : combine(labels, r);
+    const key = studioMode === 'permutation' ? studioPicks.join('') : [...studioPicks].sort().join('');
+    const shown = outcomes.slice(0, 60);
+    const extra = outcomes.length > shown.length ? `<p class="viz-more">${outcomes.length - shown.length} more not shown — shrink n or r to see every list.</p>` : '';
+    document.getElementById('studio-outcomes').innerHTML = shown.map(o => {
+        const k = studioMode === 'permutation' ? o.join('') : [...o].sort().join('');
+        const on = studioPicks.length === r && k === key ? ' highlight' : '';
+        return `<span class="outcome${on}">${o.join('')}</span>`;
+    }).join('') + extra;
+}
+
+function studioPick(id) {
+    const r = parseInt(document.getElementById('studio-r').value, 10);
+    if (studioPicks.length >= r || studioPicks.includes(id)) return;
+    studioPicks.push(id);
+    renderStudio();
+}
+
+function studioUnpick(index) {
+    studioPicks.splice(index, 1);
+    renderStudio();
+}
+
+function studioClear() {
+    studioPicks = [];
+    renderStudio();
+}
+
+function studioRandomPick() {
+    const n = parseInt(document.getElementById('studio-n').value, 10);
+    const r = parseInt(document.getElementById('studio-r').value, 10);
+    const ids = STUDIO_ITEMS.slice(0, n).map(it => it.id);
+    studioPicks = shuffleArray([...ids]).slice(0, r);
+    renderStudio();
+}
+
+function setChooser(key, value) {
+    chooser[key] = value;
+    document.querySelectorAll(`[data-${key}]`).forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute(`data-${key}`) === value);
+    });
+    const box = document.getElementById('chooser-answer');
+    if (!chooser.order || !chooser.repeat) {
+        box.innerHTML = 'Answer both questions to see the formula.';
+        return;
+    }
+    const table = {
+        'yes|no': { name: 'Permutation P(n,r)', formula: 'n! / (n−r)!', example: 'Race medals, PINs with unique digits, seating charts.' },
+        'no|no': { name: 'Combination C(n,r)', formula: 'n! / (r!(n−r)!)', example: 'Committees, lottery tickets, pizza toppings.' },
+        'yes|yes': { name: 'Functions / words n<sup>r</sup>', formula: 'n^r', example: 'Passwords that allow repeated characters, lock codes.' },
+        'no|yes': { name: 'Stars and bars C(n+r−1, r)', formula: 'C(n+r−1, r)', example: 'Scoops of ice cream with repeats, distributing identical items.' }
+    };
+    const pick = table[`${chooser.order}|${chooser.repeat}`];
+    box.innerHTML = `<strong>${pick.name}</strong><p class="formula-inline">${pick.formula}</p><p>${pick.example}</p><button class="btn btn-small btn-primary" onclick="showSection('studio')">See it in the studio</button>`;
 }
 
 function factorial(n) {
@@ -1759,6 +1940,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize calculator
     updateCalculator();
+    renderStudio();
     
     // Register service worker for PWA
     if ('serviceWorker' in navigator) {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ComboCraft - Interactive Combinatorics Learning</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- PWA Meta Tags -->
@@ -29,12 +29,12 @@
                 ComboCraft
             </h1>
             <nav class="nav">
-                <a href="#home" class="nav-link active" data-tooltip="Start here! Overview of the app">Home</a>
-                <a href="#problems" class="nav-link" data-tooltip="Solve real-world problems">Real Problems</a>
-                <a href="#games" class="nav-link" data-tooltip="Play interactive games">Games</a>
-                <a href="#calculator" class="nav-link" data-tooltip="Calculate permutations & combinations">Calculator</a>
-                <a href="#learn" class="nav-link" data-tooltip="Learn the fundamentals">Learn</a>
-                <a href="#multiplayer" class="nav-link" data-tooltip="Compete with friends">Multiplayer</a>
+                <a href="#home" class="nav-link active" data-tooltip="Start here">Home</a>
+                <a href="#studio" class="nav-link" data-tooltip="See counting visually">Studio</a>
+                <a href="#learn" class="nav-link" data-tooltip="Guided lessons">Learn</a>
+                <a href="#calculator" class="nav-link" data-tooltip="Calculate with visuals">Calculator</a>
+                <a href="#problems" class="nav-link" data-tooltip="Real-world problems">Problems</a>
+                <a href="#games" class="nav-link" data-tooltip="Practice games">Games</a>
             </nav>
             <div class="header-actions">
                 <button class="btn-hamburger mobile-only" onclick="toggleMobileNav()" title="Menu" id="hamburger-btn">
@@ -58,7 +58,7 @@
         <div id="welcome-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Welcome to Combinatorics App! 🎉</h2>
+                    <h2>Welcome to ComboCraft</h2>
                     <button class="modal-close" onclick="closeWelcomeModal()">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -79,8 +79,9 @@
         <section id="home" class="section active">
             <div class="container">
                 <div class="hero">
-                    <h2>Master Combinatorics Through Real-World Applications</h2>
-                    <p>Solve practical problems and play engaging games to strengthen your combinatorial thinking skills.</p>
+                    <p class="eyebrow">Learn by seeing, not memorizing</p>
+                    <h2>Combinatorics, made visual</h2>
+                    <p>Start with one question: <strong>does order matter?</strong> Then pick items, watch every arrangement appear, and the formula will click.</p>
                     
                     <!-- Quick Start Guide -->
                     <div class="quick-start">
@@ -89,32 +90,32 @@
                             <div class="step-item">
                                 <div class="step-number">1</div>
                                 <div class="step-content">
-                                    <strong>Learn the Basics</strong>
-                                    <p>Start with fundamentals to understand key concepts</p>
-                                    <button class="btn btn-small" onclick="showSection('learn')">Start Learning</button>
+                                    <strong>See it</strong>
+                                    <p>Build permutations and combinations with colored tiles</p>
+                                    <button class="btn btn-small" onclick="showSection('studio')">Open Studio</button>
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="step-number">2</div>
                                 <div class="step-content">
-                                    <strong>Try the Calculator</strong>
-                                    <p>Practice with permutations, combinations, and more</p>
-                                    <button class="btn btn-small" onclick="showSection('calculator')">Open Calculator</button>
+                                    <strong>Choose the formula</strong>
+                                    <p>Answer two questions and get the right counting rule</p>
+                                    <button class="btn btn-small" onclick="showSection('learn')">Which formula?</button>
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="step-number">3</div>
                                 <div class="step-content">
-                                    <strong>Solve Real Problems</strong>
-                                    <p>Apply your knowledge to practical scenarios</p>
-                                    <button class="btn btn-small" onclick="showSection('problems')">View Problems</button>
+                                    <strong>Check the math</strong>
+                                    <p>Calculator now shows the objects, not only the number</p>
+                                    <button class="btn btn-small" onclick="showSection('calculator')">Open Calculator</button>
                                 </div>
                             </div>
                             <div class="step-item">
                                 <div class="step-number">4</div>
                                 <div class="step-content">
-                                    <strong>Play Games</strong>
-                                    <p>Have fun while reinforcing your skills</p>
+                                    <strong>Apply it</strong>
+                                    <p>Practice with problems and short games</p>
                                     <button class="btn btn-small" onclick="showSection('games')">Play Games</button>
                                 </div>
                             </div>
@@ -122,33 +123,75 @@
                     </div>
                     
                     <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="showSection('problems')">
-                            <i class="fas fa-tools"></i> Solve Real Problems
+                        <button class="btn btn-primary" onclick="showSection('studio')">
+                            <i class="fas fa-th"></i> Try the studio
                         </button>
-                        <button class="btn btn-secondary" onclick="showSection('games')">
-                            <i class="fas fa-gamepad"></i> Play Games
+                        <button class="btn btn-secondary" onclick="showSection('learn')">
+                            <i class="fas fa-compass"></i> Which formula?
                         </button>
                         <button class="btn btn-outline" onclick="startTour()">
-                            <i class="fas fa-map-marked-alt"></i> Take a Tour
+                            <i class="fas fa-map-marked-alt"></i> Take a tour
                         </button>
                     </div>
                 </div>
                 
                 <div class="features">
                     <div class="feature-card">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>Real-World Applications</h3>
-                        <p>Solve scheduling, optimization, and counting problems from everyday life</p>
+                        <i class="fas fa-eye"></i>
+                        <h3>See every outcome</h3>
+                        <p>Watch ABC and BAC as different (permutation) or the same (combination)</p>
                     </div>
                     <div class="feature-card">
-                        <i class="fas fa-puzzle-piece"></i>
-                        <h3>Interactive Games</h3>
-                        <p>Engage with fun puzzles and challenges that build combinatorial intuition</p>
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Pick the right tool</h3>
+                        <p>Order? Repeats? Two answers pick nPr, nCr, n^r, or stars-and-bars</p>
                     </div>
                     <div class="feature-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Visual Learning</h3>
-                        <p>Step-by-step solutions with interactive visualizations</p>
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Practice with feedback</h3>
+                        <p>Calculator, problems, and games all use the same visual language</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Counting Studio -->
+        <section id="studio" class="section">
+            <div class="container">
+                <h2>Counting studio</h2>
+                <p class="section-lede">Toggle whether order matters, then tap tiles. Identical groups collapse when order does not count.</p>
+                <div class="studio-shell">
+                    <div class="studio-controls">
+                        <div class="control-block">
+                            <label>Items (n)</label>
+                            <input type="range" id="studio-n" min="3" max="6" value="4" oninput="renderStudio()">
+                            <span id="studio-n-label">4</span>
+                        </div>
+                        <div class="control-block">
+                            <label>Chosen (r)</label>
+                            <input type="range" id="studio-r" min="1" max="4" value="2" oninput="renderStudio()">
+                            <span id="studio-r-label">2</span>
+                        </div>
+                        <div class="mode-toggle" role="group" aria-label="Counting mode">
+                            <button type="button" class="mode-btn active" id="mode-perm" onclick="setStudioMode('permutation')">Order matters<br><small>Permutations P(n,r)</small></button>
+                            <button type="button" class="mode-btn" id="mode-comb" onclick="setStudioMode('combination')">Order does not<br><small>Combinations C(n,r)</small></button>
+                        </div>
+                    </div>
+                    <div class="studio-pool">
+                        <h3>Pool</h3>
+                        <p>Tap to fill the next slot. Tap a slot to undo.</p>
+                        <div id="studio-pool" class="chip-row"></div>
+                        <div class="slot-row" id="studio-slots"></div>
+                        <div class="studio-actions">
+                            <button class="btn btn-small btn-secondary" onclick="studioRandomPick()">Random pick</button>
+                            <button class="btn btn-small btn-outline" onclick="studioClear()">Clear</button>
+                        </div>
+                    </div>
+                    <div class="studio-result">
+                        <div class="formula-card" id="studio-formula"></div>
+                        <p class="studio-hint" id="studio-hint"></p>
+                        <h3>All outcomes</h3>
+                        <div id="studio-outcomes" class="outcome-grid"></div>
                     </div>
                 </div>
             </div>
@@ -297,6 +340,8 @@
                     <div class="calc-result">
                         <h3>Result:</h3>
                         <div id="calc-answer" class="answer">120</div>
+                        <p class="calc-plain" id="calc-plain"></p>
+                        <div id="calc-visual" class="calc-visual"></div>
                         <div id="calc-explanation" class="explanation">
                             <h4>Step-by-step solution:</h4>
                             <div id="calc-steps"></div>
@@ -338,22 +383,51 @@
         <!-- Learn Section -->
         <section id="learn" class="section">
             <div class="container">
-                <h2>Learn Combinatorics</h2>
+                <h2>Learn combinatorics</h2>
+                <p class="section-lede">Most counting problems collapse to two questions. Answer them, then open a short lesson.</p>
+                <div class="chooser" id="formula-chooser">
+                    <h3>Which formula?</h3>
+                    <div class="chooser-q">
+                        <p>Does the order of items matter?</p>
+                        <button class="btn btn-small" data-order="yes" onclick="setChooser('order','yes')">Yes — ABC ≠ BAC</button>
+                        <button class="btn btn-small" data-order="no" onclick="setChooser('order','no')">No — ABC = BAC</button>
+                    </div>
+                    <div class="chooser-q">
+                        <p>Can the same item be used more than once?</p>
+                        <button class="btn btn-small" data-repeat="no" onclick="setChooser('repeat','no')">No repeats</button>
+                        <button class="btn btn-small" data-repeat="yes" onclick="setChooser('repeat','yes')">Repeats allowed</button>
+                    </div>
+                    <div class="chooser-answer" id="chooser-answer">
+                        Answer both questions to see the formula.
+                    </div>
+                </div>
+                <div class="compare-grid">
+                    <div class="compare-card">
+                        <h3>Permutation</h3>
+                        <p class="formula-inline">P(n,r) = n! / (n−r)!</p>
+                        <p>Race finish order, passwords, seating. Sequence is the answer.</p>
+                    </div>
+                    <div class="compare-card">
+                        <h3>Combination</h3>
+                        <p class="formula-inline">C(n,r) = n! / (r!(n−r)!)</p>
+                        <p>Committees, pizza toppings, lottery tickets. The set is the answer.</p>
+                    </div>
+                </div>
                 <div class="learning-modules">
                     <div class="module-card" onclick="showLearningContent('basics')">
                         <i class="fas fa-book-open"></i>
                         <h3>Fundamentals</h3>
-                        <p>Basic principles of counting, permutations, and combinations</p>
+                        <p>Counting principles, with a 3-question check</p>
                     </div>
                     <div class="module-card" onclick="showLearningContent('advanced')">
                         <i class="fas fa-brain"></i>
-                        <h3>Advanced Topics</h3>
-                        <p>Generating functions, recurrence relations, and graph theory</p>
+                        <h3>Next ideas</h3>
+                        <p>Pigeonhole, inclusion-exclusion, graphs — in plain language</p>
                     </div>
                     <div class="module-card" onclick="showLearningContent('applications')">
                         <i class="fas fa-rocket"></i>
-                        <h3>Applications</h3>
-                        <p>Real-world uses in computer science, biology, and economics</p>
+                        <h3>Where it shows up</h3>
+                        <p>Passwords, DNA, schedules, and games</p>
                     </div>
                 </div>
                 
@@ -573,6 +647,18 @@
                 <i class="fas fa-home"></i>
                 <span>Home</span>
             </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('studio'); toggleMobileNav();">
+                <i class="fas fa-th"></i>
+                <span>Studio</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('learn'); toggleMobileNav();">
+                <i class="fas fa-book"></i>
+                <span>Learn</span>
+            </a>
+            <a href="#" class="mobile-nav-item" onclick="showSection('calculator'); toggleMobileNav();">
+                <i class="fas fa-calculator"></i>
+                <span>Calculator</span>
+            </a>
             <a href="#" class="mobile-nav-item" onclick="showSection('problems'); toggleMobileNav();">
                 <i class="fas fa-puzzle-piece"></i>
                 <span>Problems</span>
@@ -580,14 +666,6 @@
             <a href="#" class="mobile-nav-item" onclick="showSection('games'); toggleMobileNav();">
                 <i class="fas fa-gamepad"></i>
                 <span>Games</span>
-            </a>
-            <a href="#" class="mobile-nav-item" onclick="showSection('calculator'); toggleMobileNav();">
-                <i class="fas fa-calculator"></i>
-                <span>Calculator</span>
-            </a>
-            <a href="#" class="mobile-nav-item" onclick="showSection('learn'); toggleMobileNav();">
-                <i class="fas fa-book"></i>
-                <span>Learn</span>
             </a>
         </div>
     </nav>
